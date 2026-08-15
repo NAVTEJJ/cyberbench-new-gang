@@ -1,0 +1,101 @@
+{
+  "clock_offsets_sec": {
+    "identity": 90,
+    "api": -45,
+    "ci": 15,
+    "endpoint": 0,
+    "policy": 30
+  },
+  "identity_aliases": {
+    "alex@meridian.example": "p-alex",
+    "alex": "p-alex",
+    "svc-release": "p-release",
+    "svc-release@meridian.example": "p-release"
+  },
+  "corporate_asns": [64512, 64513],
+  "security_controls": {
+    "interactive_access": {
+      "review_score_min": 70,
+      "correlation_minutes": 40,
+      "protected_audience_classes": ["restricted-admin"]
+    },
+    "restricted_data": {
+      "sensitivity_labels": ["high"],
+      "path_prefixes": ["prod/"],
+      "job_start_to_read_minutes": 30,
+      "read_to_upload_minutes": 25,
+      "external_upload_min_bytes": 500000
+    },
+    "workload_privilege": {
+      "service_account_value": "service",
+      "dormant_days_min": 45,
+      "login_to_change_minutes": 60,
+      "privileged_capabilities": ["administer"]
+    }
+  },
+  "audience_catalog": {
+    "payments-admin": {"classification": "restricted-admin"},
+    "metrics-read": {"classification": "internal-read"}
+  },
+  "runner_jobs": {
+    "runner-payments-a": "job-payments-42",
+    "runner-release-a": "job-release-11"
+  },
+  "corporate_suffixes": [".meridian.internal"],
+  "approved_release_jobs": ["job-release-11"],
+  "allowed_secret_prefixes": {
+    "job-payments-42": ["dev/payments/"],
+    "job-release-11": ["prod/release/"]
+  },
+  "identity_nodes": {
+    "p-alex": "identity:alex",
+    "p-release": "identity:release"
+  },
+  "job_nodes": {
+    "job-payments-42": "job:payments"
+  },
+  "audience_targets": {
+    "payments-admin": "target:payments-admin"
+  },
+  "secret_targets": {
+    "prod/payments/key": "target:payments-secret"
+  },
+  "role_targets": {
+    "owner": "target:platform-owner"
+  },
+  "authorization_graph": {
+    "version": 100,
+    "edges": [
+      {"edge_id": "oauth-delegation", "from": "identity:alex", "to": "relay:oauth", "delegated": true, "active": true},
+      {"edge_id": "oauth-hop", "from": "relay:oauth", "to": "relay:oauth-policy", "delegated": false, "active": false},
+      {"edge_id": "oauth-target", "from": "relay:oauth-policy", "to": "target:payments-admin", "delegated": false, "active": false},
+      {"edge_id": "ci-delegation", "from": "job:payments", "to": "relay:ci", "delegated": true, "active": true},
+      {"edge_id": "ci-hop", "from": "relay:ci", "to": "relay:ci-policy", "delegated": false, "active": false},
+      {"edge_id": "ci-secret-target", "from": "relay:ci-policy", "to": "target:payments-secret", "delegated": false, "active": false},
+      {"edge_id": "role-delegation", "from": "identity:release", "to": "relay:role", "delegated": true, "active": true},
+      {"edge_id": "role-hop", "from": "relay:role", "to": "relay:role-policy", "delegated": false, "active": false},
+      {"edge_id": "role-target", "from": "relay:role-policy", "to": "target:platform-owner", "delegated": false, "active": false},
+      {"edge_id": "decoy-cycle-a", "from": "relay:oauth", "to": "relay:noise", "delegated": false, "active": true},
+      {"edge_id": "decoy-cycle-b", "from": "relay:noise", "to": "relay:oauth", "delegated": true, "active": true}
+    ]
+  },
+  "release_mirror_suffixes": [".packages.example"],
+  "group_roles": {
+    "payments-operators": ["deploy"],
+    "platform-owners": ["owner"],
+    "audit-readers": ["read"]
+  },
+  "role_capabilities": {
+    "owner": ["administer", "deploy"],
+    "cluster-admin": ["administer"],
+    "deploy": ["release"],
+    "read": ["view"]
+  },
+  "tickets": {
+    "chg-100": {
+      "status": "approved",
+      "principal": "svc-release@meridian.example",
+      "group": "platform-owners"
+    }
+  }
+}

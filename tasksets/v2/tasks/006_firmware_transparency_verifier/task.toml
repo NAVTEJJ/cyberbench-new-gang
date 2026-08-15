@@ -1,0 +1,31 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "cyber-bench/firmware_transparency_verifier"
+description = "Signed transparency-log and revocation verifier for firmware update supply-chain security"
+authors = []
+keywords = ["firmware-security", "transparency-log", "revocation", "supply-chain", "signatures"]
+
+[metadata]
+memory_limit_mb = 2048
+timeout_sec = 180
+agent_access = [ "environment" ]
+
+[verifier]
+timeout_sec = 180.0
+collect = []
+
+[verifier.env]
+
+[agent]
+
+[environment]
+allow_internet = false
+build_timeout_sec = 600.0
+os = "linux"
+mcp_servers = []
+
+[environment.env]
+
+[solution.env]

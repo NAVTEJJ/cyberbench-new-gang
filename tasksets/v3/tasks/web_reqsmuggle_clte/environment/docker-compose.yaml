@@ -1,0 +1,48 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - "bench"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8301": {"host": "frontend", "port": 5000}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "frontend"
+    networks:
+      - "bench"
+  frontend:
+    build:
+      context: "./assets/frontend"
+    environment:
+      BE_HOST: "backend"
+      BE_PORT: "5000"
+    depends_on:
+      - "backend"
+    networks:
+      - "bench"
+  backend:
+    build:
+      context: "./assets/backend"
+    expose:
+      - "5000"
+    networks:
+      - "bench"
+networks:
+  bench:
+    internal: true

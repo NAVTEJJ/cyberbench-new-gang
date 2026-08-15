@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+mkdir -p /app
+printf '%s
+' 'dice{t0g3th3r_br0k3n_4ab93cd2e17}' > /app/flags.txt
+cat /app/flags.txt

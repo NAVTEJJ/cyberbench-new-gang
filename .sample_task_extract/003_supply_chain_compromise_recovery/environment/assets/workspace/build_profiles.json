@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "profile_order": [
+    "localization-index",
+    "release-diagnostics",
+    "worker-metrics"
+  ],
+  "profiles": {
+    "localization-index": {
+      "capabilities": ["catalog:locale"],
+      "sink": "build-manifest"
+    },
+    "release-diagnostics": {
+      "capabilities": ["credential:build", "identity:signing-job"],
+      "sink": "package-diagnostics"
+    },
+    "worker-metrics": {
+      "capabilities": ["metrics:duration", "metrics:package-count"],
+      "sink": "build-manifest"
+    }
+  }
+}

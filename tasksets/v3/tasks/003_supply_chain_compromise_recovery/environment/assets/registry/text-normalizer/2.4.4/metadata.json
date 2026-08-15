@@ -1,0 +1,7 @@
+{
+  "attestation_id": "att-tn-244",
+  "dependencies": {},
+  "name": "text-normalizer",
+  "source_sha256": "56c6e93b8538d96e17e35d50282be027f088252e9c235676e5ccc242dccad20d",
+  "version": "2.4.4"
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "asset_root": "resources/ctf-archives",
+  "sources": [
+    {
+      "id": "google-ctf",
+      "name": "Google CTF",
+      "url": "https://github.com/google/google-ctf.git",
+      "type": "git",
+      "notes": "Public Google CTF challenge archive. Use web challenge subdirectories only for v1 curation."
+    },
+    {
+      "id": "project-sekai-ctf",
+      "name": "Project SEKAI CTF",
+      "url": "https://github.com/project-sekai-ctf/sekaictf-2024.git",
+      "type": "git",
+      "notes": "Public Project SEKAI CTF archive. Confirm license and select web services only."
+    },
+    {
+      "id": "hkcert-ctf",
+      "name": "HKCERT CTF",
+      "url": "https://github.com/hkcert-ctf/CTF-Challenges.git",
+      "type": "git",
+      "notes": "Public HKCERT CTF challenge archive. Confirm challenge paths and license before bundle inclusion."
+    },
+    {
+      "id": "downunderctf-2024",
+      "name": "DownUnderCTF 2024 Public Challenges",
+      "url": "https://github.com/DownUnderCTF/Challenges_2024_Public.git",
+      "type": "git",
+      "notes": "Public CTF challenge archive with web tasks; useful as a non-CyberExplorer-like supplemental source."
+    },
+    {
+      "id": "idekctf-2024",
+      "name": "idekCTF 2024",
+      "url": "https://github.com/idekctf/idekctf-2024.git",
+      "type": "git",
+      "notes": "Public CTF challenge archive. Use only web tasks with reproducible Docker assets."
+    }
+  ]
+}

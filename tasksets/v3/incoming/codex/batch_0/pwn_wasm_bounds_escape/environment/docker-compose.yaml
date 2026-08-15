@@ -1,0 +1,25 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    networks:
+      - "bench"
+
+  target:
+    build:
+      context: "./assets/challenge"
+    expose:
+      - "8080"
+    networks:
+      - "bench"
+
+networks:
+  bench:
+    internal: true

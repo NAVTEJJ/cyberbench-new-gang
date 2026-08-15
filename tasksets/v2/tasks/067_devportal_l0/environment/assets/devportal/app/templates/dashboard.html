@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>DevPortal - Dashboard</title></head>
+<body>
+<h1>Dashboard</h1>
+<p>Logged in as {{ user.username }} ({{ user.role }})</p>
+<h2>Your Projects</h2>
+<ul>
+{% for p in projects %}
+  <li>{{ p.name }} - <a href="/api/projects/{{ p.name }}">details</a></li>
+{% endfor %}
+</ul>
+<a href="/logout">Log out</a>
+</body>
+</html>

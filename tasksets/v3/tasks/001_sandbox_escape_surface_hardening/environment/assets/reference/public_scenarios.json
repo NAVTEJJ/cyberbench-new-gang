@@ -1,0 +1,14 @@
+{
+  "scenarios": [
+    {"id":"public-allow-package-get","kind":"proxy","expect":"allow","source":"package-mirror","host":"registry-cache.internal","port":443,"path":"/v1/packages/sha256/demo","method":"GET","scheme":"https"},
+    {"id":"public-allow-same-origin-redirect","kind":"proxy","expect":"allow","source":"package-mirror","host":"registry-cache.internal","port":443,"path":"/v1/packages/demo","method":"GET","scheme":"https","redirect_host":"registry-cache.internal","redirect_port":443,"redirect_path":"/v1/packages/objects/demo"},
+    {"id":"public-allow-agent-upload-token","kind":"credential","expect":"allow","principal":"agent-runner","audience":"artifact-uploader","scope":"artifact:submit"},
+    {"id":"public-allow-json-submit","kind":"artifact","expect":"allow","method":"POST","path":"/submit","content_type":"application/json","bytes":1024,"audience":"artifact-uploader","scope":"artifact:submit","archive":false,"symlink":false},
+    {"id":"public-deny-agent-metadata","kind":"network","expect":"deny","source":"agent","destination":"metadata"},
+    {"id":"public-deny-gopher-metadata","kind":"proxy","expect":"deny","source":"package-mirror","host":"metadata","port":8080,"path":"/latest/identity","method":"GET","scheme":"gopher"},
+    {"id":"public-deny-cross-origin-redirect","kind":"proxy","expect":"deny","source":"package-mirror","host":"registry-cache.internal","port":443,"path":"/v1/packages/demo","method":"GET","scheme":"https","redirect_host":"callback.invalid","redirect_port":443,"redirect_path":"/collect"},
+    {"id":"public-deny-agent-scanner-token","kind":"credential","expect":"deny","principal":"agent-runner","audience":"scanner","scope":"artifact:scan"},
+    {"id":"public-deny-archive-symlink","kind":"artifact","expect":"deny","method":"POST","path":"/submit","content_type":"application/octet-stream","bytes":4096,"audience":"artifact-uploader","scope":"artifact:submit","archive":true,"manifest":true,"symlink":true},
+    {"id":"public-deny-wrong-audience","kind":"artifact","expect":"deny","method":"POST","path":"/submit","content_type":"application/octet-stream","bytes":1024,"audience":"scanner","scope":"artifact:submit","archive":false,"symlink":false}
+  ]
+}

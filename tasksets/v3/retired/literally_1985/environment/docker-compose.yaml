@@ -1,0 +1,38 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - "bench"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8152": {"host": "umdctf-2025-literally-1985", "port": 1447}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "umdctf-2025-literally-1985"
+    networks:
+      - "bench"
+  umdctf-2025-literally-1985:
+    build:
+      context: "./assets/literally-1985"
+    expose:
+      - "1447"
+    networks:
+      - "bench"
+networks:
+  bench:
+    internal: true

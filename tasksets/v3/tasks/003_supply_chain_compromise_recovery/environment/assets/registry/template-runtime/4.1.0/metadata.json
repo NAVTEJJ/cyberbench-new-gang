@@ -1,0 +1,10 @@
+{
+  "attestation_id": "att-tr-410",
+  "dependencies": {
+    "plugin-loader": ">=1.6,<2.0",
+    "safe-math": ">=1.0,<2.0"
+  },
+  "name": "template-runtime",
+  "source_sha256": "d0b29ed03e34c4509d7682cea1156334057edf301d120e8087939e49a2363774",
+  "version": "4.1.0"
+}

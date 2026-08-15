@@ -1,0 +1,30 @@
+schema_version = "1.1"
+source = "bundles/individial_tasks/lost-transliteration/lost-transliteration.json"
+
+[task]
+name = "cyber-bench/lost-transliteration-l4"
+description = "Single-service trial for Google CTF 2025 Lost in Transliteration with cumulative hint level 4."
+authors = [{ name = "Cyber-Bench", email = "devnull@example.invalid" }]
+keywords = ["cybersecurity", "ctf", "web", "terminal-bench"]
+
+[metadata]
+category = "cybersecurity"
+bundle_id = "lost-transliteration"
+scored_service_count = 1
+decoy_service_count = 0
+target_ports = [8102]
+hint_level = 4
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 120.0
+
+[environment]
+build_timeout_sec = 1800.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+allow_internet = true

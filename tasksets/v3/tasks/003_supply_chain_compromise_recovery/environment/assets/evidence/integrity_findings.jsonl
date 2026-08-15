@@ -1,0 +1,5 @@
+{"candidate_id": "cand-pl-route", "event_id": "evt-find-001", "kind": "candidate.flag", "subject": "plugin-loader@1.6.0"}
+{"candidate_id": "cand-me-observer", "event_id": "evt-find-002", "kind": "candidate.flag", "subject": "metrics-exporter@1.2.0"}
+{"candidate_id": "cand-tn-246", "event_id": "evt-find-003", "kind": "candidate.flag", "subject": "text-normalizer@2.4.6"}
+{"candidate_id": "cand-trial-04", "event_id": "evt-find-004", "kind": "candidate.flag", "subject": "trial-04"}
+{"candidate_id": "cand-rk-transform", "event_id": "evt-find-005", "kind": "candidate.flag", "subject": "report-kit@1.8.0"}

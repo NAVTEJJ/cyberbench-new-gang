@@ -1,0 +1,27 @@
+services:
+  main:
+    build:
+      context: "."
+    command: ["sh","-c","sleep infinity"]
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: ["bench"]
+  target:
+    image: "python:3.12"
+    command: ["python","/opt/cyberbench/gateway.py"]
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8422": {"host": "unicode-normalization-bypass", "port": 5000}}'
+    volumes: ["./gateway.py:/opt/cyberbench/gateway.py:ro"]
+    depends_on: ["unicode-normalization-bypass"]
+    networks: ["bench"]
+  unicode-normalization-bypass:
+    image: "cyberbench/sample:unicode-normalization-bypass"
+    expose: ["5000"]
+    build:
+      context: "./assets/unicode-normalization-bypass"
+    networks: ["bench"]
+networks:
+  bench:
+    internal: true

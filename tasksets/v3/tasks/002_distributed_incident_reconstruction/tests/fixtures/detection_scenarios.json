@@ -1,0 +1,112 @@
+{
+  "scenarios": [
+    {
+      "name": "variant-a",
+      "expect_alert": true,
+      "events": [
+        {"utc": "2026-09-01T10:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 34, "session_id": "hs-1", "user": "hidden-analyst-1"},
+        {"utc": "2026-09-01T10:06:00Z", "event_type": "pipeline_trigger", "source_session": "hs-1", "job_id": "hj-1", "runner_identity": "svc-h1"},
+        {"utc": "2026-09-01T10:11:00Z", "event_type": "secret_read", "origin_job": "hj-1", "secret": "prod/customer-reader"},
+        {"utc": "2026-09-01T10:16:00Z", "event_type": "bulk_export", "origin_job": "hj-1", "principal": "svc-h1", "rows": 900, "export_id": "he-1"},
+        {"utc": "2026-09-01T10:21:00Z", "event_type": "outbound_upload", "export_id": "he-1", "destination": "relay.example"}
+      ]
+    },
+    {
+      "name": "variant-b",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-02T12:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 93, "session_id": "hs-2", "change_status": "approved"},
+        {"utc": "2026-09-02T12:04:00Z", "event_type": "pipeline_trigger", "source_session": "hs-2", "job_id": "hj-2", "runner_identity": "svc-h2", "change_status": "approved"},
+        {"utc": "2026-09-02T12:09:00Z", "event_type": "secret_read", "origin_job": "hj-2", "secret": "prod/support", "change_status": "approved"},
+        {"utc": "2026-09-02T12:14:00Z", "event_type": "bulk_export", "origin_job": "hj-2", "principal": "svc-h2", "rows": 3200, "export_id": "he-2", "change_status": "approved"},
+        {"utc": "2026-09-02T12:19:00Z", "event_type": "outbound_upload", "export_id": "he-2", "destination": "support.partner.example", "change_status": "approved"}
+      ]
+    },
+    {
+      "name": "variant-c",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-03T08:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 87, "session_id": "hs-3"},
+        {"utc": "2026-09-03T08:03:00Z", "event_type": "pipeline_trigger", "source_session": "different-session", "job_id": "hj-3", "runner_identity": "svc-h3"},
+        {"utc": "2026-09-03T08:08:00Z", "event_type": "secret_read", "origin_job": "different-job", "secret": "prod/data"},
+        {"utc": "2026-09-03T08:13:00Z", "event_type": "bulk_export", "origin_job": "feed-job", "principal": "svc-other", "rows": 4000, "export_id": "he-3"},
+        {"utc": "2026-09-03T08:18:00Z", "event_type": "outbound_upload", "export_id": "he-3", "destination": "outside.example"}
+      ]
+    },
+    {
+      "name": "variant-d",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-04T06:00:00Z", "event_type": "bulk_export", "origin_job": "partner-feed", "principal": "svc-feed-hidden", "rows": 6500, "export_id": "he-4"},
+        {"utc": "2026-09-04T06:08:00Z", "event_type": "outbound_upload", "export_id": "he-4", "destination": "feed.partner.example"}
+      ]
+    },
+    {
+      "name": "variant-e",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-05T11:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 77, "session_id": "hs-5"},
+        {"utc": "2026-09-05T11:04:00Z", "event_type": "pipeline_trigger", "source_session": "hs-5", "job_id": "hj-5", "runner_identity": "svc-h5"},
+        {"utc": "2026-09-05T11:09:00Z", "event_type": "secret_read", "origin_job": "hj-5", "secret": "prod/support", "change_status": "approved"},
+        {"utc": "2026-09-05T11:14:00Z", "event_type": "bulk_export", "origin_job": "hj-5", "principal": "svc-h5", "rows": 2700, "export_id": "he-5"},
+        {"utc": "2026-09-05T11:19:00Z", "event_type": "outbound_upload", "export_id": "he-5", "destination": "support.partner.example"}
+      ]
+    },
+    {
+      "name": "variant-f",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-06T13:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 69, "session_id": "hs-6"},
+        {"utc": "2026-09-06T13:04:00Z", "event_type": "pipeline_trigger", "source_session": "hs-6", "job_id": "hj-6", "runner_identity": "svc-h6"},
+        {"utc": "2026-09-06T13:09:00Z", "event_type": "secret_read", "origin_job": "hj-6", "secret": "prod/reporting"},
+        {"utc": "2026-09-06T13:14:00Z", "event_type": "bulk_export", "origin_job": "hj-6", "principal": "svc-h6", "rows": 3600, "export_id": "he-6"},
+        {"utc": "2026-09-06T13:19:00Z", "event_type": "outbound_upload", "export_id": "he-6", "destination": "warehouse.internal"}
+      ]
+    },
+    {
+      "name": "variant-g",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-07T12:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 72, "session_id": "hs-7"},
+        {"utc": "2026-09-07T12:03:00Z", "event_type": "pipeline_trigger", "source_session": "hs-7", "job_id": "hj-7", "runner_identity": "svc-h7"},
+        {"utc": "2026-09-07T12:07:00Z", "event_type": "secret_read", "origin_job": "hj-7", "secret": "dev/forecast/config"},
+        {"utc": "2026-09-07T12:12:00Z", "event_type": "bulk_export", "origin_job": "hj-7", "principal": "svc-h7", "rows": 1700, "export_id": "he-7"},
+        {"utc": "2026-09-07T12:16:00Z", "event_type": "outbound_upload", "export_id": "he-7", "destination": "dev-collaboration.example"}
+      ]
+    },
+    {
+      "name": "variant-h",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-08T02:00:00Z", "event_type": "pipeline_trigger", "source_session": "service/scheduler", "job_id": "hj-8", "runner_identity": "svc-h8"},
+        {"utc": "2026-09-08T02:05:00Z", "event_type": "secret_read", "origin_job": "hj-8", "secret": "prod/partner-feed"},
+        {"utc": "2026-09-08T02:11:00Z", "event_type": "bulk_export", "origin_job": "hj-8", "principal": "svc-h8", "rows": 5400, "export_id": "he-8"},
+        {"utc": "2026-09-08T02:16:00Z", "event_type": "outbound_upload", "export_id": "he-8", "destination": "managed-transfer.example"}
+      ]
+    },
+    {
+      "name": "variant-i",
+      "expect_alert": false,
+      "events": [
+        {"utc": "2026-09-09T09:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 81, "session_id": "hs-9"},
+        {"utc": "2026-09-09T09:03:00Z", "event_type": "pipeline_trigger", "source_session": "hs-9", "job_id": "hj-9", "runner_identity": "svc-shared"},
+        {"utc": "2026-09-09T09:07:00Z", "event_type": "secret_read", "origin_job": "hj-9", "secret": "prod/customer-reader"},
+        {"utc": "2026-09-09T09:12:00Z", "event_type": "bulk_export", "origin_job": "different-job", "principal": "svc-shared", "rows": 4100, "export_id": "he-9"},
+        {"utc": "2026-09-09T09:17:00Z", "event_type": "outbound_upload", "export_id": "he-9", "destination": "outside.example"}
+      ]
+    },
+    {
+      "name": "variant-j",
+      "expect_alert": true,
+      "events": [
+        {"utc": "2026-09-10T14:00:00Z", "event_type": "oauth_device_authorized", "new_device": true, "risk": 66, "session_id": "hs-10"},
+        {"utc": "2026-09-10T14:03:00Z", "event_type": "pipeline_trigger", "source_session": "hs-10", "job_id": "hj-10", "runner_identity": "svc-shared-10"},
+        {"utc": "2026-09-10T14:06:00Z", "event_type": "secret_read", "origin_job": "hj-10", "secret": "prod/customer-reader"},
+        {"utc": "2026-09-10T14:08:00Z", "event_type": "bulk_export", "origin_job": "benign-job", "principal": "svc-shared-10", "rows": 2000, "export_id": "benign-export"},
+        {"utc": "2026-09-10T14:10:00Z", "event_type": "outbound_upload", "export_id": "benign-export", "destination": "archive.internal"},
+        {"utc": "2026-09-10T14:13:00Z", "event_type": "bulk_export", "origin_job": "hj-10", "principal": "svc-shared-10", "rows": 2300, "export_id": "he-10"},
+        {"utc": "2026-09-10T14:18:00Z", "event_type": "outbound_upload", "export_id": "he-10", "destination": "relay.example"}
+      ]
+    }
+  ]
+}

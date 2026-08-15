@@ -1,0 +1,18 @@
+Application Configuration File
+================================
+
+App Name: Access Control Challenge
+Version: 1.0.0
+Environment: Development
+
+Database Settings:
+- Host: localhost
+- Port: 5432
+- Database: access_db
+
+Security Settings:
+- Debug Mode: Enabled
+- SSL: Disabled
+- Authentication: Basic
+
+Note: This is a sample configuration file for demonstration purposes. 

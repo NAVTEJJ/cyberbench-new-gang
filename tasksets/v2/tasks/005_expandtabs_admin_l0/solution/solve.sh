@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cat > /app/flags.txt << 'FLAGS'
+cyberbench{3xp4ndt4bs_t4b_4dm1n_byp4ss}
+FLAGS

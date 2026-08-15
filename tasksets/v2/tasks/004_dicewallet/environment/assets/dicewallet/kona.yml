@@ -1,0 +1,66 @@
+# Reference: https://github.com/project-sekai-ctf/konata
+challenges:
+  - category: web
+    name: dicewallet
+    author: strellic
+    sort_weight: 79
+    description: |
+      i slopped together this wallet extension the day of the CTF... what could go wrong?
+    attachments:
+      files:
+        - "bot/"
+        - "challenge/"
+    flags:
+      rctf: dice{last_m1nute_chall_writing_go_brrrr}
+    instancer_config:
+      challenge_integration_id: "{{ challenge.name }}"
+      timeout_milliseconds: 1800000
+      extendable: true
+      expose:
+        - kind: https
+          host_prefix: "{{ challenge.name }}"
+          container_name: app
+          container_port: 8080
+      config:
+        pods:
+          - name: app
+            ports:
+              - protocol: TCP
+                name: http-service
+                port: 8080
+            spec:
+              containers:
+                - name: app
+                  image: "{{ images[challenge.name] }}"
+                  resources:
+                    requests:
+                      cpu: "3.5"
+                      memory: "10Gi"
+                    limits:
+                      cpu: "5"
+                      memory: "12Gi"
+                  readinessProbe:
+                    tcpSocket:
+                      port: 8080
+                    initialDelaySeconds: 5
+                    periodSeconds: 3
+                  env:
+                    - name: FLAG
+                      value: "{{ challenge.flags.rctf }}"
+                    - name: ADMIN_MNEMONIC
+                      value: "dice square group company very awesome also more cool then friend citizen"
+                    - name: RPC_URL
+                      value: "https://mainnet.infura.io/v3/7b6d490188ab4dccac1f48ee6378ff98"
+              restartPolicy: Always
+              terminationGracePeriodSeconds: 0
+              automountServiceAccountToken: false
+            egress: true
+
+deployment:
+  images:
+    - build_context: .
+      dockerfile: bot/Dockerfile
+      name: "{{ challenges[0].name }}"
+      tag: latest
+      registry_name: instancer-challenges
+      platform: linux/amd64

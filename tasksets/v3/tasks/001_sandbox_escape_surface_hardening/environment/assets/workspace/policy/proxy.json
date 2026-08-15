@@ -1,0 +1,12 @@
+{
+  "listen_networks": ["agent_net", "control_net", "egress_net"],
+  "allowed_schemes": ["http", "https", "file", "gopher"],
+  "destination_rules": [
+    {"host": "*", "ports": ["*"], "path_prefixes": ["*"], "methods": ["*"]}
+  ],
+  "redirect_policy": "any",
+  "allow_ip_literals": true,
+  "revalidate_dns": false,
+  "strip_auth_on_redirect": false,
+  "forward_caller_auth": true
+}

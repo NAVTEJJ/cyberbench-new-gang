@@ -1,0 +1,31 @@
+{
+  "direct_flows": [
+    ["agent", "package-mirror"],
+    ["agent", "artifact-uploader"],
+    ["package-mirror", "proxy"],
+    ["proxy", "registry-cache"],
+    ["proxy", "revocation-service"],
+    ["artifact-uploader", "scanner"],
+    ["scanner", "quarantine-store"]
+  ],
+  "proxy_requests": [
+    {"source": "package-mirror", "host": "registry-cache.internal", "port": 443, "path": "/v1/packages/sha256/demo", "method": "GET", "scheme": "https"},
+    {"source": "package-mirror", "host": "registry-cache.internal", "port": 443, "path": "/v1/packages/sha256/demo", "method": "HEAD", "scheme": "https"},
+    {"source": "package-mirror", "host": "revocation.internal", "port": 443, "path": "/v1/revocations/demo", "method": "GET", "scheme": "https"}
+  ],
+  "token_hops": [
+    {"principal": "agent-runner", "audience": "artifact-uploader", "scope": "artifact:submit"},
+    {"principal": "package-mirror", "audience": "registry-cache", "scope": "package:read"},
+    {"principal": "package-mirror", "audience": "revocation-service", "scope": "revocation:read"},
+    {"principal": "artifact-uploader", "audience": "scanner", "scope": "artifact:scan"},
+    {"principal": "scanner", "audience": "quarantine-store", "scope": "quarantine:write"}
+  ],
+  "artifact_submission": {
+    "method": "POST",
+    "path": "/submit",
+    "content_types": ["application/json", "application/octet-stream"],
+    "largest_required_bytes": 8388608,
+    "archive_manifest_required": true
+  },
+  "agent_writes": ["/app/workspace", "/logs/agent"]
+}

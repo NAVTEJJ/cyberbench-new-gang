@@ -1,0 +1,88 @@
+# services:
+#   main:
+#     build:
+#       context: "."
+#     command: ["sh", "-c", "sleep infinity"]
+#     depends_on:
+#       target:
+#         condition: "service_started"
+#     networks: [bench]
+
+#   target:
+#     image: "python:3.12"
+#     command: ["python", "/opt/cyberbench/gateway.py"]
+#     environment:
+#       CYBERBENCH_GATEWAY_MAP: '{"8100": {"host": "my-challenge", "port": 5000}}'
+#     volumes:
+#       - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+#     depends_on: [my-challenge]
+#     networks: [bench]
+
+#   my-challenge:
+#     build:
+#       context: "./assets/my-challenge"
+#     expose: ["5000"]
+#     networks: [bench]
+
+# networks:
+#   bench:
+#     internal: true
+
+
+services:
+  main:
+    build:
+      context: "."
+    container_name: main
+    networks:
+      - bench
+    volumes:
+      - /app
+      - /logs/agent
+      - /logs/verifier
+
+  target:
+    image: "python:3.12"
+    command: ["python", "/opt/cyberbench/gateway.py"]
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8100": {"host": "my_challenge", "port": 5003}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    networks:
+      - bench
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: access_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./assets/my_challenge/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - bench
+    # NO ports: — internal only
+
+  my_challenge:
+    build:
+      context: "./assets/my_challenge"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: access_db
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_PORT: 5432
+    expose:
+      - "5003"       
+    networks:
+      - bench
+
+networks:
+  bench:
+    driver: bridge
+
+volumes:
+  pgdata:

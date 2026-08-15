@@ -1,0 +1,17 @@
+File Viewer Help
+================
+
+Usage:
+- Access files using the 'file' parameter: /files?file=filename.txt
+- Available files are listed in readme.txt
+
+Security Note:
+This application is designed for educational purposes to demonstrate
+security vulnerabilities. In a real application, proper input validation
+and access controls should be implemented.
+
+Hints for CTF participants:
+- Look for files outside the intended directory
+- Consider what happens with relative paths like ../ 
+- Check if there are any hidden directories or files
+- Try different file extensions and paths 

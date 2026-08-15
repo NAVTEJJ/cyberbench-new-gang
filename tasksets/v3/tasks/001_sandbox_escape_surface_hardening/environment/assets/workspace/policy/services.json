@@ -1,0 +1,30 @@
+{
+  "services": {
+    "agent": {
+      "networks": ["agent_net", "control_net", "egress_net", "ingest_net"],
+      "user": "root",
+      "capabilities": ["NET_ADMIN", "SYS_ADMIN"],
+      "no_new_privileges": false,
+      "read_only_rootfs": false,
+      "writable_paths": ["/app", "/logs/agent", "/evaluator"],
+      "mounts": [
+        {"source": "/var/run/docker.sock", "target": "/var/run/docker.sock", "mode": "rw"},
+        {"source": "/srv/evaluator", "target": "/evaluator", "mode": "rw"}
+      ],
+      "seccomp": "unconfined",
+      "pid_namespace": "host",
+      "identity": "agent-runner"
+    },
+    "package-mirror": {"networks": ["agent_net", "control_net"], "user": "mirror", "identity": "package-mirror"},
+    "artifact-uploader": {"networks": ["agent_net", "control_net", "ingest_net"], "user": "uploader", "identity": "artifact-uploader"},
+    "proxy": {"networks": ["agent_net", "control_net", "egress_net"], "user": "proxy", "identity": "proxy"},
+    "registry-cache": {"networks": ["control_net"], "user": "registry", "identity": "registry-cache"},
+    "revocation-service": {"networks": ["control_net"], "user": "revocation", "identity": "revocation-service"},
+    "scanner": {"networks": ["ingest_net", "control_net"], "user": "scanner", "identity": "scanner"},
+    "quarantine-store": {"networks": ["ingest_net", "control_net"], "user": "quarantine", "identity": "quarantine-store"},
+    "metadata": {"networks": ["control_net"], "user": "metadata", "identity": "metadata"},
+    "credential-broker": {"networks": ["control_net"], "user": "broker", "identity": "credential-broker"},
+    "evaluator": {"networks": ["control_net"], "user": "evaluator", "identity": "evaluator"},
+    "callback": {"networks": ["egress_net"], "user": "nobody", "identity": "callback"}
+  }
+}

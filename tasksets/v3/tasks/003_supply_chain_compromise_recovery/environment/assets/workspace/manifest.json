@@ -1,0 +1,19 @@
+{
+  "components": {
+    "analytics-worker": {
+      "dependencies": {
+        "analytics-core": ">=3.2,<4.0",
+        "metrics-exporter": ">=1.2,<2.0",
+        "stats-core": ">=2.0,<3.0"
+      }
+    },
+    "report-service": {
+      "dependencies": {
+        "analytics-core": ">=3.2,<4.0",
+        "locale-data": ">=3.0,<4.0",
+        "report-kit": ">=1.8,<2.0"
+      }
+    }
+  },
+  "name": "atlas-monorepo"
+}

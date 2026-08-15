@@ -1,0 +1,42 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: "{\"8126\": {\"host\": \"byuctf-2024-random\", \"port\": 1337}}"
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "byuctf-2024-random"
+    networks:
+      - "bench"
+  byuctf-2024-random:
+    image: "cyberbench/byuctf-2024:random"
+    expose:
+      - "1337"
+    build:
+      context: "./assets/random"
+    networks:
+      - "bench"
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

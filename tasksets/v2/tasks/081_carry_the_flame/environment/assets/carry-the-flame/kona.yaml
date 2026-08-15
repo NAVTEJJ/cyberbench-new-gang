@@ -1,0 +1,92 @@
+# Reference: https://github.com/project-sekai-ctf/konata
+challenges:
+  - category: crypto
+    name: carry-the-flame
+    author: wwm
+    sort_weight: 99
+    description: 🔥🔥🔥🔥🔥🔥🔥
+    attachments:
+      files:
+        - "challenge.py"
+    flags:
+      rctf:
+        file: flag.txt
+    endpoints:
+      - type: nc
+        endpoint: "{{ challenge.name }}.{{ config.domains['kctf'] }}"
+        port: 1337
+    # instancer_config:
+    #   challenge_integration_id: "carrytf"
+    #   timeout_milliseconds: 1800000
+    #   extendable: true
+    #   expose:
+    #     - kind: tcp-ssl
+    #       host_prefix: "{{ challenge.name }}"
+    #       container_name: app
+    #       container_port: 5000
+    #   config:
+    #     pods:
+    #       - name: app
+    #         ports:
+    #           - protocol: TCP
+    #             name: tcp-service
+    #             port: 5000
+    #         spec:
+    #           containers:
+    #             - name: app
+    #               image: "{{ images[challenge.name] }}"
+    #               securityContext:
+    #                 privileged: true
+    #               resources:
+    #                 requests:
+    #                   cpu: "1"
+    #                   memory: "512Mi"
+    #                 limits:
+    #                   cpu: "1"
+    #                   memory: "1Gi"
+    #           restartPolicy: Always
+    #           terminationGracePeriodSeconds: 0
+    #           automountServiceAccountToken: false
+    #         egress: true
+
+deployment:
+  images:
+    - path: .
+      name: "{{ challenges[0].name }}"
+      tag: latest
+      registry_name: challenges
+      platform: linux/amd64
+
+  kubernetes_inline_manifests:
+    - cluster_name: main
+      documents:
+        - apiVersion: kctf.dev/v1
+          kind: Challenge
+          metadata:
+            name: "{{ challenges[0].name }}"
+          spec:
+            deployed: true
+            image: "{{ images[challenges[0].name] }}"
+            network:
+              public: true
+              ports:
+                - protocol: "TCP"
+                  port: 1337
+                  targetPort: 5000
+            healthcheck:
+              enabled: false
+            # horizontalPodAutoscalerSpec:
+            #   maxReplicas: 30
+            #   minReplicas: 25
+            #   targetCPUUtilizationPercentage: 80
+            podTemplate:
+              template:
+                spec:
+                  containers:
+                    - name: challenge
+                      resources:
+                        requests:
+                          cpu: "1"
+                          memory: "512Mi"
+                      securityContext:
+                        privileged: true

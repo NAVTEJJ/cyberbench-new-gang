@@ -1,0 +1,4 @@
+interface:
+  display_name: "Calculate Cyber-Bench Budgets"
+  short_description: "Calculate headroom candidates and empirical caps"
+  default_prompt: "Use $calculate-cyberbench-budgets to calculate separate CTF and mem-vul budget frontiers and qualify headroom candidates from this Harbor jobs folder."

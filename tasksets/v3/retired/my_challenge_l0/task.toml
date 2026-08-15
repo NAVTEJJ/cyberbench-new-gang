@@ -1,0 +1,21 @@
+schema_version = "1.1"
+
+[task]
+name        = "cyber-bench/my_challenge_l0"
+description = "My challenge - no hints."
+keywords    = ["cybersecurity", "ctf", "web"]
+
+[metadata]
+category             = "cybersecurity"
+bundle_id            = "my_challenge"
+scored_service_count = 1
+target_ports         = [8100]
+hint_level           = 0
+
+[agent]
+timeout_sec          = 3600.0
+
+[environment]
+cpus                 = 2
+memory_mb            = 4096
+allow_internet       = true

@@ -1,0 +1,32 @@
+services:
+  main:
+    build:
+      context: "."
+    command: ["sh","-c","sleep infinity"]
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command: ["python","/opt/cyberbench/gateway.py"]
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8477": {"host": "double-python-bypass", "port": 5000}}'
+    volumes: ["./gateway.py:/opt/cyberbench/gateway.py:ro"]
+    depends_on: ["double-python-bypass"]
+    networks: ["bench"]
+  double-python-bypass:
+    image: "cyberbench/sample:double-python-bypass"
+    expose: ["5000"]
+    build:
+      context: "./assets/double-python-bypass"
+    networks: ["bench"]
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

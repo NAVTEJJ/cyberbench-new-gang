@@ -1,0 +1,27 @@
+services:
+  main:
+    build:
+      context: "."
+    command: ["sh","-c","sleep infinity"]
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: ["bench"]
+  target:
+    image: "python:3.12"
+    command: ["python","/opt/cyberbench/gateway.py"]
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8438": {"host": "unicode-nfkc-superscript", "port": 5000}}'
+    volumes: ["./gateway.py:/opt/cyberbench/gateway.py:ro"]
+    depends_on: ["unicode-nfkc-superscript"]
+    networks: ["bench"]
+  unicode-nfkc-superscript:
+    image: "cyberbench/sample:unicode-nfkc-superscript"
+    expose: ["5000"]
+    build:
+      context: "./assets/unicode-nfkc-superscript"
+    networks: ["bench"]
+networks:
+  bench:
+    internal: true

@@ -1,0 +1,27 @@
+services:
+  main:
+    build:
+      context: "."
+    command: ["sh","-c","sleep infinity"]
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    networks: ["bench"]
+  target:
+    image: "python:3.12"
+    command: ["python","/opt/cyberbench/gateway.py"]
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8431": {"host": "accept-header-inject", "port": 5000}}'
+    volumes: ["./gateway.py:/opt/cyberbench/gateway.py:ro"]
+    depends_on: ["accept-header-inject"]
+    networks: ["bench"]
+  accept-header-inject:
+    image: "cyberbench/sample:accept-header-inject"
+    expose: ["5000"]
+    build:
+      context: "./assets/accept-header-inject"
+    networks: ["bench"]
+networks:
+  bench:
+    internal: true

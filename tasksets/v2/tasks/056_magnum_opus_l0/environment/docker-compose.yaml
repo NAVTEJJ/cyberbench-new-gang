@@ -1,0 +1,41 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: "{\"8130\": {\"host\": \"magnum-opus\", \"port\": 1337}}"
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "magnum-opus"
+    networks:
+      - "bench"
+  magnum-opus:
+    build:
+      context: "./assets/magnum-opus/challenge/src"
+    expose:
+      - "1337"
+    networks:
+      - "bench"
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

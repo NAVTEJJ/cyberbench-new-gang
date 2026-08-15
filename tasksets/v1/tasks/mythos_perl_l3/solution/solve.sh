@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cat > /app/flags.txt <<'FLAGS'
+CTF{I_like_my_packages_like_I_like_my_python_classes_like_I_like_my_javascript_objects...polluted.Anyway_hope_to_see_some_of_yall_in_mexico_city!}
+FLAGS

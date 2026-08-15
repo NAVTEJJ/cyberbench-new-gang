@@ -1,0 +1,61 @@
+# Reference: https://github.com/project-sekai-ctf/konata
+challenges:
+  - category: misc
+    name: pytecoding
+    author: aplet123
+    sort_weight: 79
+    description: |
+      It's like bytecoding, but pythonic.
+    attachments:
+      files:
+        - Dockerfile
+        - printflag-example
+        - chall.py
+    flags:
+      rctf: "dice{mildly_toxic_python_bytecoding}"
+    endpoints:
+      - type: nc
+        endpoint: "{{ challenge.name }}.{{ config.domains['kctf'] }}"
+        port: 1337
+
+deployment:
+  images:
+    - path: .
+      name: "{{ challenges[0].name }}"
+      tag: latest
+      registry_name: challenges
+      platform: linux/amd64
+
+  kubernetes_inline_manifests:
+    - cluster_name: main
+      documents:
+        - apiVersion: kctf.dev/v1
+          kind: Challenge
+          metadata:
+            name: "{{ challenges[0].name }}"
+          spec:
+            deployed: true
+            image: "{{ images[challenges[0].name] }}"
+            network:
+              public: true  # instance will not be exposed until this is set to true (dns update can take a while)
+              ports:
+                - protocol: "TCP"
+                  port: 1337
+                  targetPort: 5000
+            healthcheck:
+              enabled: false
+            # horizontalPodAutoscalerSpec:
+            #   maxReplicas: 6
+            #   minReplicas: 1
+            #   targetCPUUtilizationPercentage: 80
+            podTemplate:
+              template:
+                spec:
+                  containers:
+                    - name: challenge
+                      resources:
+                        requests:
+                          cpu: "100m"
+                          memory: "100Mi"
+                      securityContext:
+                        privileged: true

@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "recipes": {
+    "rev-ld-300": {
+      "recipe_id": "recipe-python-copy-v3",
+      "strip_line_prefixes": ["# source-map:"]
+    },
+    "rev-me-120": {
+      "recipe_id": "recipe-python-copy-v3",
+      "strip_line_prefixes": ["# source-map:"]
+    },
+    "rev-pl-160": {
+      "composed_capture": "generated_intermediates/rel-6d20/routes.composed.json",
+      "generated_capture": "generated_intermediates/rel-6d20/routes.clean.json",
+      "generated_line_prefix": "ROUTE_ROWS:",
+      "recipe_id": "recipe-python-copy-v3",
+      "renderer": "python-route-table-v1",
+      "strip_line_prefixes": ["# source-map:"]
+    },
+    "rev-rk-180": {
+      "recipe_id": "recipe-python-copy-v3",
+      "strip_line_prefixes": ["# source-map:"]
+    },
+    "rev-tn-241": {
+      "recipe_id": "recipe-python-copy-v3",
+      "strip_line_prefixes": ["# source-map:"]
+    },
+    "rev-tr-410": {
+      "recipe_id": "recipe-python-copy-v3",
+      "strip_line_prefixes": ["# source-map:"]
+    }
+  }
+}

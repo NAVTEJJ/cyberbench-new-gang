@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DiceWallet CTF</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: #fffdf5; color: #111; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .container { width: 100%; max-width: 480px; padding: 2rem; }
+    h1 { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    p.sub { font-size: 0.85rem; opacity: 0.6; margin-bottom: 2rem; font-weight: 700; }
+    .card { border: 4px solid #111; background: #fff; padding: 1.5rem; box-shadow: 6px 6px 0 #111; margin-bottom: 1.5rem; }
+    .card h2 { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; opacity: 0.5; }
+    label { display: block; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+    input[type="text"] { width: 100%; border: 4px solid #111; padding: 0.6rem 0.8rem; font-size: 0.9rem; font-weight: 700; font-family: inherit; background: #fffdf5; margin-bottom: 1rem; }
+    input[type="text"]:focus { outline: none; background: #fef3c7; }
+    button { width: 100%; border: 4px solid #111; padding: 0.7rem; font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; font-family: inherit; transition: all 0.1s; }
+    button:active { transform: translate(2px, 2px); box-shadow: none; }
+    .btn-primary { background: #fbbf24; box-shadow: 4px 4px 0 #111; }
+    .btn-primary:hover { background: #f59e0b; }
+    .btn-secondary { background: #c4b5fd; box-shadow: 4px 4px 0 #111; }
+    .btn-secondary:hover { background: #a78bfa; }
+    .result { margin-top: 1rem; border: 4px solid #111; padding: 0.8rem; font-size: 0.85rem; font-weight: 700; display: none; }
+    .result.ok { background: #bbf7d0; }
+    .result.err { background: #fecaca; }
+    .result.info { background: #e0e7ff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DiceWallet</h1>
+    <p class="sub">Steal the admin bot's recovery phrase to get the flag.</p>
+
+    <div class="card">
+      <h2>Send URL to Bot</h2>
+      <form id="visit-form">
+        <label for="url-input">URL (http:// or https://)</label>
+        <input type="text" id="url-input" placeholder="https://your-server.com/exploit" />
+        <button type="submit" class="btn-primary">Send to Bot</button>
+      </form>
+      <div class="result" id="visit-result"></div>
+    </div>
+
+    <div class="card">
+      <h2>Submit Mnemonic for Flag</h2>
+      <form id="flag-form">
+        <label for="mnemonic-input">Recovery Phrase</label>
+        <input type="text" id="mnemonic-input" placeholder="word1 word2 word3 ..." />
+        <button type="submit" class="btn-secondary">Get Flag</button>
+      </form>
+      <div class="result" id="flag-result"></div>
+    </div>
+  </div>
+
+  <script>
+    function showResult(el, msg, cls) {
+      el.textContent = msg;
+      el.className = "result " + cls;
+      el.style.display = "block";
+    }
+
+    document.getElementById("visit-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const url = document.getElementById("url-input").value.trim();
+      const el = document.getElementById("visit-result");
+      if (!url) return showResult(el, "Enter a URL", "err");
+      showResult(el, "Sending...", "info");
+      try {
+        const res = await fetch("/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url }),
+        });
+        const data = await res.json();
+        if (data.error) showResult(el, data.error, "err");
+        else showResult(el, data.message, "ok");
+      } catch (e) { showResult(el, e.message, "err"); }
+    });
+
+    document.getElementById("flag-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const mnemonic = document.getElementById("mnemonic-input").value.trim();
+      const el = document.getElementById("flag-result");
+      if (!mnemonic) return showResult(el, "Enter the recovery phrase", "err");
+      showResult(el, "Checking...", "info");
+      try {
+        const res = await fetch("/flag", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mnemonic }),
+        });
+        const data = await res.json();
+        if (data.flag) showResult(el, data.flag, "ok");
+        else showResult(el, data.error, "err");
+      } catch (e) { showResult(el, e.message, "err"); }
+    });
+  </script>
+</body>
+</html>

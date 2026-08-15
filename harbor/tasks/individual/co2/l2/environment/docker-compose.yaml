@@ -1,0 +1,35 @@
+services:
+  main:
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - "bench"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: "{\"8111\": {\"host\": \"ductf-2024-co2\", \"port\": 1337}}"
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "ductf-2024-co2"
+    networks:
+      - "bench"
+  ductf-2024-co2:
+    image: "cyberbench/ductf-2024:co2"
+    expose:
+      - "1337"
+    build:
+      context: "../../../../../assets/web-5/sources/co2"
+    environment:
+      flag: "false"
+    networks:
+      - "bench"
+networks:
+  bench:
+    internal: true

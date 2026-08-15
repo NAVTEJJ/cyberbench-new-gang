@@ -1,0 +1,1 @@
+CYBERBENCH{magnum_opus_pickle_rand_sudoku_vm}

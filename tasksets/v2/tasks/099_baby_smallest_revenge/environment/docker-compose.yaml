@@ -1,0 +1,44 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8136": {"host": "trx-2026-baby-smallest-revenge", "port": 1337}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "trx-2026-baby-smallest-revenge"
+    networks:
+      - "bench"
+  trx-2026-baby-smallest-revenge:
+    platform: "linux/amd64"
+    image: "cb-baby-smallest-revenge-target-amd64:latest"
+    build:
+      context: "./assets/baby-smallest-revenge"
+    expose:
+      - "1337"
+    privileged: true
+    networks:
+      - "bench"
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

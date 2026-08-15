@@ -1,0 +1,46 @@
+{
+  "approved_changes": [
+    {
+      "change_ticket": "CHG-4812",
+      "window_utc": ["2026-07-17T08:15:00Z", "2026-07-17T08:45:00Z"],
+      "requester": "oliver.ng",
+      "repository": "analytics-ops",
+      "execution_identity": "svc-incident-response",
+      "allowed_secret_paths": ["prod/db-readonly"],
+      "allowed_destinations": ["secure-support.vendor.example"],
+      "purpose": "Customer support diagnostic for incident INC-773"
+    },
+    {
+      "change_ticket": "CHG-4822",
+      "window_utc": ["2026-07-17T08:45:00Z", "2026-07-17T09:10:00Z"],
+      "requester": "scheduler",
+      "repository": "data-platform",
+      "execution_identity": "svc-backup",
+      "allowed_secret_paths": ["prod/finance-backup"],
+      "allowed_destinations": ["vault.storage.example"],
+      "purpose": "Month-end finance snapshot"
+    }
+  ],
+  "required_workflows": [
+    {
+      "name": "forecast-development-build",
+      "identity": "svc-forecast-build",
+      "repository": "forecast-api",
+      "required_secret_paths": ["dev/forecast/config"],
+      "allowed_pipelines": ["nightly-test", "forecast-model-publish"],
+      "allowed_destinations": ["artifacts.internal", "model-registry.partner.example"]
+    },
+    {
+      "name": "customer-support-diagnostic",
+      "identity": "svc-incident-response",
+      "repository": "analytics-ops",
+      "required_secret_paths": ["prod/db-readonly"]
+    },
+    {
+      "name": "month-end-finance-snapshot",
+      "identity": "svc-backup",
+      "repository": "data-platform",
+      "required_secret_paths": ["prod/finance-backup"]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8155": {"host": "umdctf-2026-vkexchange", "port": 1451}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "umdctf-2026-vkexchange"
+    networks:
+      - "bench"
+  umdctf-2026-vkexchange:
+    build:
+      context: "./assets/vkexchange"
+    expose:
+      - "1451"
+    networks:
+      - "bench"
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

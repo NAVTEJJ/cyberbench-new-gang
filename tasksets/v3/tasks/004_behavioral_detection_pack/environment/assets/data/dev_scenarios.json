@@ -1,0 +1,65 @@
+{
+  "scenarios": [
+    {
+      "scenario_id": "case-001",
+      "label": "device_code_takeover",
+      "events": [
+        {"event_id": "d3", "ts": "2026-08-01T12:20:45Z", "source": "api", "event_type": "api_token_used", "principal": "alex@meridian.example", "session_id": "s-7", "source_asn": 64599, "audience": "payments-admin", "authz_version": 101},
+        {"event_id": "d1", "ts": "2026-08-01T11:58:30Z", "source": "identity", "event_type": "oauth_device_authorized", "user": "alex", "session_id": "s-7", "risk": 82, "new_device": true, "source_asn": 64512},
+        {"event_id": "d4", "ts": "2026-08-01T12:09:30Z", "source": "policy", "event_type": "authorization_edge_changed", "transaction_id": "tx-dev-oauth", "edge_id": "oauth-hop", "action": "activate"},
+        {"event_id": "d5", "ts": "2026-08-01T12:10:30Z", "source": "policy", "event_type": "authorization_edge_changed", "transaction_id": "tx-dev-oauth", "edge_id": "oauth-target", "action": "activate"},
+        {"event_id": "d6", "ts": "2026-08-01T12:11:30Z", "source": "policy", "event_type": "authorization_policy_committed", "transaction_id": "tx-dev-oauth", "policy_version": 101},
+        {"event_id": "d2", "ts": "2026-08-01T12:08:30Z", "source": "identity", "event_type": "mfa_method_added", "user": "alex", "session_id": "s-7"},
+        {"event_id": "d1", "ts": "2026-08-01T11:58:30Z", "source": "identity", "event_type": "oauth_device_authorized", "user": "alex", "session_id": "s-7", "risk": 82, "new_device": true, "source_asn": 64512}
+      ]
+    },
+    {
+      "scenario_id": "case-002",
+      "label": "ci_secret_exfil",
+      "events": [
+        {"event_id": "c2", "ts": "2026-08-01T12:13:00Z", "source": "endpoint", "event_type": "artifact_upload", "runner_id": "runner-payments-a", "destination": "drop.example.test", "bytes": 800000},
+        {"event_id": "c1", "ts": "2026-08-01T11:59:45Z", "source": "ci", "event_type": "secret_read", "job_id": "job-payments-42", "secret_path": "prod/payments/key", "sensitivity": "medium", "authz_version": 101},
+        {"event_id": "c3", "ts": "2026-08-01T11:54:45Z", "source": "ci", "event_type": "ci_job_started", "job_id": "job-payments-42"},
+        {"event_id": "c4", "ts": "2026-08-01T11:55:30Z", "source": "policy", "event_type": "authorization_edge_changed", "transaction_id": "tx-dev-ci", "edge_id": "ci-hop", "action": "activate"},
+        {"event_id": "c5", "ts": "2026-08-01T11:56:30Z", "source": "policy", "event_type": "authorization_edge_changed", "transaction_id": "tx-dev-ci", "edge_id": "ci-secret-target", "action": "activate"},
+        {"event_id": "c6", "ts": "2026-08-01T11:57:30Z", "source": "policy", "event_type": "authorization_policy_committed", "transaction_id": "tx-dev-ci", "policy_version": 101}
+      ]
+    },
+    {
+      "scenario_id": "case-003",
+      "label": "service_account_lateral",
+      "events": [
+        {"event_id": "l2", "ts": "2026-08-01T12:30:45Z", "source": "api", "event_type": "group_membership_changed", "actor": "svc-release@meridian.example", "member": "svc-release", "group": "platform-owners", "authz_version": 101},
+        {"event_id": "l1", "ts": "2026-08-01T11:58:30Z", "source": "identity", "event_type": "service_login", "actor": "svc-release", "account_type": "service", "dormant_days": 61},
+        {"event_id": "l4", "ts": "2026-08-01T12:11:30Z", "source": "policy", "event_type": "authorization_edge_changed", "transaction_id": "tx-dev-role", "edge_id": "role-hop", "action": "activate"},
+        {"event_id": "l5", "ts": "2026-08-01T12:12:30Z", "source": "policy", "event_type": "authorization_edge_changed", "transaction_id": "tx-dev-role", "edge_id": "role-target", "action": "activate"},
+        {"event_id": "l6", "ts": "2026-08-01T12:13:30Z", "source": "policy", "event_type": "authorization_policy_committed", "transaction_id": "tx-dev-role", "policy_version": 101},
+        {"event_id": "l3", "ts": "2026-08-01T12:10:00Z", "source": "endpoint", "event_type": "remote_service_created", "actor": "svc-release"}
+      ]
+    },
+    {
+      "scenario_id": "case-004",
+      "label": "benign",
+      "events": [
+        {"event_id": "b1", "ts": "2026-08-01T11:58:30Z", "source": "identity", "event_type": "oauth_device_authorized", "user": "alex", "session_id": "s-vpn", "risk": 90, "new_device": true, "source_asn": 64512},
+        {"event_id": "b2", "ts": "2026-08-01T12:20:45Z", "source": "api", "event_type": "api_token_used", "principal": "alex@meridian.example", "session_id": "s-vpn", "source_asn": 64513}
+      ]
+    },
+    {
+      "scenario_id": "case-005",
+      "label": "benign",
+      "events": [
+        {"event_id": "r1", "ts": "2026-08-01T11:59:45Z", "source": "ci", "event_type": "secret_read", "job_id": "job-release-11", "secret_path": "prod/release/key", "sensitivity": "high"},
+        {"event_id": "r2", "ts": "2026-08-01T12:12:00Z", "source": "endpoint", "event_type": "artifact_upload", "runner_id": "runner-release-a", "destination": "mirror.packages.example", "bytes": 900000}
+      ]
+    },
+    {
+      "scenario_id": "case-006",
+      "label": "benign",
+      "events": [
+        {"event_id": "g1", "ts": "2026-08-01T11:58:30Z", "source": "identity", "event_type": "service_login", "actor": "svc-release", "account_type": "service", "dormant_days": 80},
+        {"event_id": "g2", "ts": "2026-08-01T12:30:45Z", "source": "api", "event_type": "group_membership_changed", "actor": "svc-release@meridian.example", "group": "platform-owners", "ticket_id": "chg-100"}
+      ]
+    }
+  ]
+}

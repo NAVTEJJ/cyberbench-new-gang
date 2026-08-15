@@ -1,0 +1,15 @@
+{
+  "allowed_methods": ["GET", "POST", "PUT", "DELETE"],
+  "allowed_paths": ["*"],
+  "allowed_content_types": ["*"],
+  "max_bytes": 1073741824,
+  "allow_symlinks": true,
+  "extract_archives": true,
+  "parse_manifest": true,
+  "scan_required": false,
+  "require_uploader_auth": false,
+  "required_audience": "",
+  "required_scope": "",
+  "scanner_audience": "*",
+  "scanner_scope": "*"
+}

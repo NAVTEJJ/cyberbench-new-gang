@@ -1,0 +1,44 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8139": {"host": "trx-2026-down-the-line", "port": 1337}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "trx-2026-down-the-line"
+    networks:
+      - "bench"
+  trx-2026-down-the-line:
+    platform: "linux/amd64"
+    image: "environment-trx-2026-down-the-line:latest"
+    build:
+      context: "./assets/down-the-line"
+    expose:
+      - "1337"
+    privileged: true
+    networks:
+      - "bench"
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

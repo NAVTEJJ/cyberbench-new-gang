@@ -1,0 +1,58 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - "bench"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: "{\"8128\": {\"host\": \"socialmedia2-app\", \"port\": 40007}, \"8129\": {\"host\": \"socialmedia2-admin\", \"port\": 40008}}"
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "socialmedia2-app"
+      - "socialmedia2-admin"
+    networks:
+      - "bench"
+  socialmedia2-app:
+    image: "cyberbench/byu-eos:socialmedia2"
+    command:
+      - "python3"
+      - "/ctf/unhackable2.py"
+    expose:
+      - "40007"
+    build:
+      context: "./assets/socialmedia2"
+    networks:
+      - "bench"
+  socialmedia2-admin:
+    image: "cyberbench/byu-eos:socialmedia2"
+    command:
+      - "node"
+      - "/ctf/admin_bot.js"
+    environment:
+      CHAL_URL: "http://socialmedia2-app:40007/"
+    expose:
+      - "40008"
+    depends_on:
+      - "socialmedia2-app"
+    build:
+      context: "./assets/socialmedia2"
+    networks:
+      - "bench"
+networks:
+  bench:
+    internal: true

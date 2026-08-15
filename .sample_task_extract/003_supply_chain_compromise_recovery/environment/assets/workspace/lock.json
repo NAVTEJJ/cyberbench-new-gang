@@ -1,0 +1,66 @@
+{
+  "format": 2,
+  "generated_by": "atlas-resolver/1.1",
+  "packages": [
+    {
+      "attestation_id": "att-rk-180",
+      "name": "report-kit",
+      "source_sha256": "cc6d38fbcce8fa0bc949590498cf9e832d9afea69209c7a2eeb86e1915365932",
+      "version": "1.8.0"
+    },
+    {
+      "attestation_id": "att-tn-241-release",
+      "name": "text-normalizer",
+      "source_sha256": "56c6e93b8538d96e17e35d50282be027f088252e9c235676e5ccc242dccad20d",
+      "version": "2.4.1"
+    },
+    {
+      "attestation_id": "att-tr-410",
+      "name": "template-runtime",
+      "source_sha256": "d0b29ed03e34c4509d7682cea1156334057edf301d120e8087939e49a2363774",
+      "version": "4.1.0"
+    },
+    {
+      "attestation_id": "att-pl-160-release",
+      "name": "plugin-loader",
+      "source_sha256": "feca45d40f1068201d06b16e001b1bf484de53cd2cb1cca070879af400389f3c",
+      "version": "1.6.0"
+    },
+    {
+      "attestation_id": "att-ld-300",
+      "name": "locale-data",
+      "source_sha256": "f278699989c845fac5c8d11a8103a4f82d7ef1aa6a3744862e6867ceab5e38e7",
+      "version": "3.0.0"
+    },
+    {
+      "attestation_id": "att-sm-100",
+      "name": "safe-math",
+      "source_sha256": "a6fe11afddd5160a1349ddef93d499d2610cd6ff690ba15ccb2d465868cec0d5",
+      "version": "1.0.0"
+    },
+    {
+      "attestation_id": "att-ac-320",
+      "name": "analytics-core",
+      "source_sha256": "a58b2f5c1d21156c3b873f79ee3d25fe4d42c0e1727f679279b2f48340b463a5",
+      "version": "3.2.0"
+    },
+    {
+      "attestation_id": "att-df-110",
+      "name": "datefmt",
+      "source_sha256": "44006e27471f9a254c792cd74cb772ad1dd1b44d4d9e873b366a5352f637da52",
+      "version": "1.1.0"
+    },
+    {
+      "attestation_id": "att-sc-200",
+      "name": "stats-core",
+      "source_sha256": "d73985f218b47b04c086e2b1d5e5e6cf05d22e9147618f137d0050b99e9394f7",
+      "version": "2.0.0"
+    },
+    {
+      "attestation_id": "att-me-120",
+      "name": "metrics-exporter",
+      "source_sha256": "6239ab33461e13e41a88980490ff0d6ffc66f7f955faead202edb08925c5c8d3",
+      "version": "1.2.0"
+    }
+  ]
+}

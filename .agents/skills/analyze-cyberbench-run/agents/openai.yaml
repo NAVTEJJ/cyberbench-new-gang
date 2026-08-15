@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Cyber-Bench Run"
+  short_description: "Summarize Harbor jobs and legacy runs"
+  default_prompt: "Use $analyze-cyberbench-run to summarize a Harbor job under jobs/ or a legacy run under runs/, classifying attacker actions, verifier scoring, pass/fail points, and environment issues."

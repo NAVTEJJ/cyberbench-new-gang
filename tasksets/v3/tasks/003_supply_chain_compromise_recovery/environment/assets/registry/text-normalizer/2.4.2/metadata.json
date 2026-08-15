@@ -1,0 +1,7 @@
+{
+  "dependencies": {},
+  "attestation_id": "att-tn-242",
+  "name": "text-normalizer",
+  "source_sha256": "f2b6b7eb03e8f0039663810c12bc9c74fef718fa3b2500d84491c563deed22c7",
+  "version": "2.4.2"
+}

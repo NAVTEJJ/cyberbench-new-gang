@@ -1,0 +1,33 @@
+services:
+  main:
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - "bench"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: "{\"8113\": {\"host\": \"hkcert-2024-webpage-to-pdf-1\", \"port\": 5000}}"
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "hkcert-2024-webpage-to-pdf-1"
+    networks:
+      - "bench"
+  hkcert-2024-webpage-to-pdf-1:
+    image: "cyberbench/hkcert-2024:webpage-to-pdf-1"
+    expose:
+      - "5000"
+    build:
+      context: "../../../../../assets/web-5/sources/webpage-to-pdf-1"
+    networks:
+      - "bench"
+networks:
+  bench:
+    internal: true

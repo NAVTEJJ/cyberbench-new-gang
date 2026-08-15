@@ -1,0 +1,42 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - "bench"
+
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8292": {"host": "cbench-2025-ariadne", "port": 5000}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "cbench-2025-ariadne"
+    networks:
+      - "bench"
+
+  cbench-2025-ariadne:
+    image: "cyberbench/cbench-2025:ariadne"
+    expose:
+      - "5000"
+    build:
+      context: "./assets/ariadne"
+    networks:
+      - "bench"
+
+networks:
+  bench:
+    internal: true

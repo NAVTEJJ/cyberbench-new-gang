@@ -1,0 +1,34 @@
+{
+  "default": "quarantined-release",
+  "format": 1,
+  "scenarios": {
+    "analytics-signing": {
+      "build_mode": "release",
+      "stages": {
+        "analytics-worker": "package-sign",
+        "report-service": "package-test"
+      }
+    },
+    "developer": {
+      "build_mode": "developer",
+      "stages": {
+        "analytics-worker": "package-test",
+        "report-service": "package-test"
+      }
+    },
+    "quarantined-release": {
+      "build_mode": "release",
+      "stages": {
+        "analytics-worker": "package-test",
+        "report-service": "package-sign"
+      }
+    },
+    "release-validation": {
+      "build_mode": "release",
+      "stages": {
+        "analytics-worker": "package-test",
+        "report-service": "package-test"
+      }
+    }
+  }
+}

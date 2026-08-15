@@ -1,0 +1,31 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "cyber-bench/sanitizer_crash_triage"
+description = "Sanitizer crash triage engine for deduplicating exploit crashes and identifying root-cause vulnerability classes"
+authors = []
+keywords = ["memory-vulnerability", "asan", "ubsan", "crash-triage", "exploit-analysis"]
+
+[metadata]
+memory_limit_mb = 2048
+timeout_sec = 180
+agent_access = [ "environment" ]
+
+[verifier]
+timeout_sec = 180.0
+collect = []
+
+[verifier.env]
+
+[agent]
+
+[environment]
+allow_internet = false
+build_timeout_sec = 600.0
+os = "linux"
+mcp_servers = []
+
+[environment.env]
+
+[solution.env]

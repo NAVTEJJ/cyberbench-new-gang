@@ -1,0 +1,74 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+  target:
+    image: "python:3.12"
+    command:
+      - "python"
+      - "/opt/cyberbench/gateway.py"
+    environment:
+      CYBERBENCH_GATEWAY_MAP: '{"8148": {"host": "a-minecraft-movie-frontend", "port": 4173}, "8149": {"host": "a-minecraft-movie-bot", "port": 4000}}'
+    volumes:
+      - "./gateway.py:/opt/cyberbench/gateway.py:ro"
+    depends_on:
+      - "a_minecraft_movie_frontend"
+      - "a_minecraft_movie_bot"
+    networks:
+      - "bench"
+  a_minecraft_movie_backend:
+    build:
+      context: "./assets/a-minecraft-movie/backend"
+    environment:
+      FRONTEND_URL: http://a-minecraft-movie-frontend:4173
+    networks:
+      bench:
+        aliases:
+          - "a-minecraft-movie-backend"
+  a_minecraft_movie_frontend:
+    build:
+      context: "./assets/a-minecraft-movie/frontend"
+      args:
+        VITE_API_URL: http://a-minecraft-movie-backend:3000
+    expose:
+      - "4173"
+    depends_on:
+      - "a_minecraft_movie_backend"
+    networks:
+      bench:
+        aliases:
+          - "a-minecraft-movie-frontend"
+  a_minecraft_movie_bot:
+    build:
+      context: "./assets/a-minecraft-movie/bot"
+    environment:
+      FRONTEND_URL: http://a-minecraft-movie-frontend:4173
+    expose:
+      - "4000"
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    depends_on:
+      - "a_minecraft_movie_frontend"
+    networks:
+      bench:
+        aliases:
+          - "a-minecraft-movie-bot"
+  harbor-docker-egress-control-sidecar:
+    image: "alpine:3.20"
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      bench:
+        aliases:
+          - "main"
+networks:
+  bench:
+    internal: true

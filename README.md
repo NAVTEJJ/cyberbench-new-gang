@@ -27,3 +27,4 @@ Oracle run results (trajectories, verifier details, reward files) for each task 
 4. **N009 distinctness** — confirmed distinct from N001 (different task/flag/vuln class)
 5. **Stale artifacts** — cleaned old job/workflow artifacts
 6. **Source exposure (N004/N008)** — separate attacker Dockerfile without target source
+7. **CRLF shebangs (all tasks)** — `solve.sh`/`test.sh` had Windows CRLF line endings baked into the zip; Harbor execs `.sh` files directly (kernel reads the shebang line), so `#!/usr/bin/env bash\r` fails with "bad interpreter" on any Linux runner. Normalized to LF and `package_task.py` now converts CRLF→LF automatically on every future repack.

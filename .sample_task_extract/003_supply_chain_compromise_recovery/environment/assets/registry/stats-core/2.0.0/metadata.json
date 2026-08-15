@@ -1,7 +1,0 @@
-{
-  "attestation_id": "att-sc-200",
-  "dependencies": {},
-  "name": "stats-core",
-  "source_sha256": "d73985f218b47b04c086e2b1d5e5e6cf05d22e9147618f137d0050b99e9394f7",
-  "version": "2.0.0"
-}

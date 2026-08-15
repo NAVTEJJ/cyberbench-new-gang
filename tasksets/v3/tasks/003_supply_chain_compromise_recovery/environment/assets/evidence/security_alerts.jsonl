@@ -1,3 +1,0 @@
-{"alert_id": "alt-61c0", "build_id": "build-7ac4", "event_id": "evt-alert-61c0", "kind": "policy.alert", "observed_event_id": "evt-w-quarantine-profile", "policy": "build-extension-capability-boundary", "severity": "high", "utc": "2026-07-08T16:26:03Z"}
-{"alert_id": "alt-183e", "build_id": "build-test-05", "event_id": "evt-alert-183e", "kind": "quality.alert", "policy": "test-flake-budget", "severity": "low", "utc": "2026-07-08T17:05:05Z"}
-{"alert_id": "alt-2b19", "event_id": "evt-alert-2b19", "kind": "cache.alert", "policy": "cache-eviction-rate", "severity": "low", "utc": "2026-07-08T17:19:00Z"}

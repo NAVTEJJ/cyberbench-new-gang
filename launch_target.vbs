@@ -1,2 +1,0 @@
-Set objShell = CreateObject("WScript.Shell")
-objShell.Run "cmd /c ""C:\Users\NAVTEJ\Downloads\Cyber-Bench-main\.venv\Scripts\python.exe"" ""C:\Users\NAVTEJ\Downloads\Cyber-Bench-main\.agents\skills\build-cyberbench-task\scripts\workflow.py"" --manifest ""C:\Users\NAVTEJ\Downloads\Cyber-Bench-main\tasksets\v3\incoming\099\.task-factory-runtime\task-factory.toml"" run-target --attempts 3 > ""C:\Users\NAVTEJ\Downloads\Cyber-Bench-main\target_stdout.txt"" 2> ""C:\Users\NAVTEJ\Downloads\Cyber-Bench-main\target_stderr.txt""", 0, False

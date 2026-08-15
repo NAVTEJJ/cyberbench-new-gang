@@ -1,6 +1,0 @@
-{
-  "key_event_log": "trust/key_events.jsonl",
-  "policy": "A production artifact requires signatures from at least two distinct keys holding the atlas-release role at the attestation issued_at timestamp. Key authority is reconstructed from the event log; later grants do not validate earlier signatures and revocation takes effect at its event timestamp.",
-  "required_role": "atlas-release",
-  "threshold": 2
-}

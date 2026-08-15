@@ -1,5 +1,0 @@
-{"event_id":"key-1001","key_id":"rel-a","operation":"grant","role":"atlas-release","utc":"2025-01-15T00:00:00Z"}
-{"event_id":"key-1002","key_id":"rel-b","operation":"grant","role":"atlas-release","utc":"2025-01-15T00:00:00Z"}
-{"event_id":"key-1010","key_id":"mirror-a","operation":"grant","role":"mirror-ingest","utc":"2025-02-01T00:00:00Z"}
-{"event_id":"key-1081","key_id":"rel-c","operation":"grant","role":"atlas-release","utc":"2026-07-08T17:30:00Z"}
-{"event_id":"key-1084","key_id":"rel-a","operation":"revoke","role":"atlas-release","utc":"2026-07-08T17:45:00Z"}

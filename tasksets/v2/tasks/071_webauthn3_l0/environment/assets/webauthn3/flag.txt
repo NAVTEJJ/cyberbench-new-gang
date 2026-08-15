@@ -1,1 +1,0 @@
-CYBERBENCH{webauthn3_userhandle_signcount_takeover}

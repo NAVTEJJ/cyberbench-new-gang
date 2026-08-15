@@ -1,7 +1,0 @@
-interface:
-  display_name: "Build Cyber-Bench Task"
-  short_description: "Create and harden fair Cyber-Bench tasks"
-  default_prompt: "Use $build-cyberbench-task to autonomously create, validate, calibrate, and harden a Cyber-Bench task within a fixed OpenRouter budget."
-
-policy:
-  allow_implicit_invocation: false

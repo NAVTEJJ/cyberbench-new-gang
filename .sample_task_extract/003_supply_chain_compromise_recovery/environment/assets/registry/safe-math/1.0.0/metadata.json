@@ -1,7 +1,0 @@
-{
-  "attestation_id": "att-sm-100",
-  "dependencies": {},
-  "name": "safe-math",
-  "source_sha256": "a6fe11afddd5160a1349ddef93d499d2610cd6ff690ba15ccb2d465868cec0d5",
-  "version": "1.0.0"
-}

@@ -1,6 +1,0 @@
-data
-.git
-.gitignore
-*.log
-node_modules
-.next

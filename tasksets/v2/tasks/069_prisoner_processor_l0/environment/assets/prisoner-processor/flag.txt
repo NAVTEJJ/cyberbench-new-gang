@@ -1,1 +1,0 @@
-CYBERBENCH{prisoner_processor_proto_null_fd_rce}

@@ -1,3 +1,0 @@
-flask>=3.0
-cryptography>=42
-PyJWT>=2.8

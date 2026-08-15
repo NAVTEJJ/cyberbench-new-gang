@@ -1,1 +1,0 @@
-UMDCTF{smallbins_still_love_the_stack_when_the_house_sets_the_table}

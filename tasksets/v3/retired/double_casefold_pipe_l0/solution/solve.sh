@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-cat > /app/flags.txt << 'FLAGS'
-cyberbench{d0ubl3_c4s3f0ld_p1p3_r3c0rd}
-FLAGS

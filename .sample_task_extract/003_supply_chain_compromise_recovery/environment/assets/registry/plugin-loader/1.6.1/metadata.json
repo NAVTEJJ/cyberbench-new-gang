@@ -1,8 +1,0 @@
-{
-  "attestation_id": "att-pl-161",
-  "dependencies": {},
-  "name": "plugin-loader",
-  "provides": ["atlas.extension-dispatcher/v1"],
-  "source_sha256": "a9d1077c22e84873d3ff7d73458f5a59ce8501a624854b305374da44452e62d6",
-  "version": "1.6.1"
-}

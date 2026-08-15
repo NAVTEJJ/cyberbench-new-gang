@@ -1,0 +1,23 @@
+=================================================================
+==29==ERROR: AddressSanitizer: attempting double-free on 0x503000000040 in thread T0:
+    #0 0x7b10a4549537 in __interceptor_free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:127
+    #1 0x5ffa0be4be57 in cmd_del /src/target.c:109
+    #2 0x5ffa0be4be57 in main /src/target.c:250
+    #3 0x7b10a4295d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #4 0x7b10a4295e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+    #5 0x5ffa0be4b444 in _start (/out/kvstore_cmd+0x2444)
+
+0x503000000040 is located 0 bytes inside of 18-byte region [0x503000000040,0x503000000052)
+freed by thread T0 here:
+    #0 0x7b10a4549537 in __interceptor_free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:127
+    #1 0x5ffa0be4be57 in cmd_del /src/target.c:109
+    #2 0x5ffa0be4be57 in main /src/target.c:250
+
+previously allocated by thread T0 here:
+    #0 0x7b10a4549887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x5ffa0be4bc38 in dup_str /src/target.c:36
+    #2 0x5ffa0be4bc38 in cmd_put /src/target.c:86
+    #3 0x5ffa0be4bc38 in main /src/target.c:240
+
+SUMMARY: AddressSanitizer: double-free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:127 in __interceptor_free
+==29==ABORTING

@@ -1,0 +1,14 @@
+{
+    "job_name": "oracle_unsigned_cookie_base85_l0",
+    "jobs_dir": "/tmp/oracle_results",
+    "n_concurrent_trials": 1,
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "tasks": [
+        {
+            "path": "tasksets/v3/incoming/generated/batch_1/008/unsigned_cookie_base85_l0"
+        }
+    ]
+}

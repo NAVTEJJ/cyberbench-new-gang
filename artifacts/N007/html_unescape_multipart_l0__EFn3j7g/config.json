@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "tasksets/v3/incoming/generated/batch_1/007/html_unescape_multipart_l0"
+    },
+    "trial_name": "html_unescape_multipart_l0__EFn3j7g",
+    "trials_dir": "/tmp/oracle_results/oracle_html_unescape_multipart_l0",
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "job_id": "cff03a56-ef60-4f35-ac8b-5346412955a0"
+}

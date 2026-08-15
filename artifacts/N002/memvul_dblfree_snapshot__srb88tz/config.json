@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "tasksets/v3/incoming/generated/batch_1/002/memvul_dblfree_snapshot"
+    },
+    "trial_name": "memvul_dblfree_snapshot__srb88tz",
+    "trials_dir": "/tmp/oracle_results/oracle_n002_debug",
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "job_id": "62e1cf00-2a1b-4c56-9366-311cf6db9a71"
+}

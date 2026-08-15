@@ -1,0 +1,7 @@
+{
+  "crash_type": "double-free",
+  "program": "kvstore_cmd",
+  "reason": "PASS: double-free triggered in kvstore_cmd",
+  "reward": 1.0,
+  "sanitizer": "asan"
+}

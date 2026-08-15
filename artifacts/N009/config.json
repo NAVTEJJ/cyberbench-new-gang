@@ -1,0 +1,14 @@
+{
+    "job_name": "oracle_split_ws_header_l0",
+    "jobs_dir": "/tmp/oracle_results",
+    "n_concurrent_trials": 1,
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "tasks": [
+        {
+            "path": "tasksets/v3/incoming/generated/batch_1/009/split_ws_header_l0"
+        }
+    ]
+}

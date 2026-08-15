@@ -1,0 +1,14 @@
+{
+    "job_name": "oracle_translate_gap_xor_l0",
+    "jobs_dir": "/tmp/oracle_results",
+    "n_concurrent_trials": 1,
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "tasks": [
+        {
+            "path": "tasksets/v3/incoming/generated/batch_1/006/translate_gap_xor_l0"
+        }
+    ]
+}

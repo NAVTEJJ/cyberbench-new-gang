@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "tasksets/v3/incoming/generated/batch_1/005/json_ast_pipe_l0"
+    },
+    "trial_name": "json_ast_pipe_l0__Usb9jWx",
+    "trials_dir": "/tmp/oracle_results/oracle_json_ast_pipe_l0",
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "job_id": "5ed698c1-170d-4510-9d10-bc50dd161dda"
+}

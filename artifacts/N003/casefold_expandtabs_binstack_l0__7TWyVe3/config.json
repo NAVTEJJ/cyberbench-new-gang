@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "tasksets/v3/incoming/generated/batch_1/003/casefold_expandtabs_binstack_l0"
+    },
+    "trial_name": "casefold_expandtabs_binstack_l0__7TWyVe3",
+    "trials_dir": "/tmp/oracle_results/oracle_casefold_expandtabs_binstack_l0",
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "job_id": "b1d0186b-d865-4e47-a419-451c4740b4a2"
+}

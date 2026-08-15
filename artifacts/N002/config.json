@@ -1,0 +1,15 @@
+{
+    "job_name": "oracle_n002_debug",
+    "jobs_dir": "/tmp/oracle_results",
+    "debug": true,
+    "n_concurrent_trials": 1,
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "tasks": [
+        {
+            "path": "tasksets/v3/incoming/generated/batch_1/002/memvul_dblfree_snapshot"
+        }
+    ]
+}

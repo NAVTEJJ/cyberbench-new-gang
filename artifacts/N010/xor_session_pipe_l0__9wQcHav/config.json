@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "tasksets/v3/incoming/generated/batch_1/010/xor_session_pipe_l0"
+    },
+    "trial_name": "xor_session_pipe_l0__9wQcHav",
+    "trials_dir": "/tmp/oracle_results/oracle_xor_session_pipe_l0",
+    "environment": {
+        "type": "docker",
+        "force_build": true
+    },
+    "job_id": "46e2a84e-8f66-4081-8f7f-a82be2663634"
+}

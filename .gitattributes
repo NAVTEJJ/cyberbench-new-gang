@@ -1,1 +1,2 @@
-*.zip binary -diff -text
+* text=auto eol=lf
+*.sh text eol=lf

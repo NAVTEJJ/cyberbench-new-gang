@@ -59,16 +59,16 @@ same status as J010.
 
 | Folder | Task ID | Status |
 |--------|---------|--------|
-| K001_dusky_conduit_l0/ | triple_round_splitlines_bool_l0 | oracle=1.0, reviewed, no target trial yet |
-| K002_faint_anchor_l0/ | triple_floor_endian_isnumeric_l0 | oracle=1.0, reviewed, no target trial yet |
-| K003_brindled_spire_l0/ | triple_find_zfill_decode_l0 | oracle=1.0, reviewed, no target trial yet |
-| K004_murk_signal_l0/ | triple_maxsplit_splitext_float_l0 | oracle=1.0, reviewed, no target trial yet |
-| K005_pale_cradle_l0/ | triple_setdefault_ascii_fullmatch_l0 | oracle=1.0, reviewed, no target trial yet |
-| K006_sunken_reach_l0/ | triple_strip_octal_nan_l0 | oracle=1.0, reviewed, no target trial yet |
-| K007_gilded_harbor_l0/ | triple_round_find_rsplit_l0 | oracle=1.0, reviewed, no target trial yet |
-| K008_mute_ridge_l0/ | triple_floor_maxsplit_isdecimal_l0 | oracle=1.0, reviewed, no target trial yet |
-| K009_wan_cove_l0/ | triple_setdefault_strip_decode_l0 | oracle=1.0, reviewed, no target trial yet |
-| K010_ember_latch_l0/ | triple_round_setdefault_isnumeric_l0 | oracle=1.0, reviewed, no target trial yet |
+| K001_dusky_conduit_l0/ | round_splitlines_bool_l0 | oracle=1.0, reviewed, no target trial yet |
+| K002_faint_anchor_l0/ | floor_endian_isnumeric_l0 | oracle=1.0, reviewed, no target trial yet |
+| K003_brindled_spire_l0/ | find_zfill_decode_l0 | oracle=1.0, reviewed, no target trial yet |
+| K004_murk_signal_l0/ | maxsplit_splitext_float_l0 | oracle=1.0, reviewed, no target trial yet |
+| K005_pale_cradle_l0/ | setdefault_ascii_fullmatch_l0 | oracle=1.0, reviewed, no target trial yet |
+| K006_sunken_reach_l0/ | strip_octal_nan_l0 | oracle=1.0, reviewed, no target trial yet |
+| K007_gilded_harbor_l0/ | round_find_rsplit_l0 | oracle=1.0, reviewed, no target trial yet |
+| K008_mute_ridge_l0/ | floor_maxsplit_isdecimal_l0 | oracle=1.0, reviewed, no target trial yet |
+| K009_wan_cove_l0/ | setdefault_strip_decode_l0 | oracle=1.0, reviewed, no target trial yet |
+| K010_ember_latch_l0/ | round_setdefault_isnumeric_l0 | oracle=1.0, reviewed, no target trial yet |
 
 ## Artifacts
 

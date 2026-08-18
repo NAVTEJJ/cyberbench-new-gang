@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-floor-endian-isnumeric"
+  ],
+  "submitted": [
+    "cyberbench{triple_floor_endian_isnumeric_composition}"
+  ]
+}

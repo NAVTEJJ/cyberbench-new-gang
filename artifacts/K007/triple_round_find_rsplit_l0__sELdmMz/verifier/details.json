@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-round-find-rsplit"
+  ],
+  "submitted": [
+    "cyberbench{triple_round_find_rsplit_composition}"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_19",
+    "tasks": [
+        {
+            "path": "tasksets\\v3\\incoming\\triple_maxsplit_splitext_float_l0"
+        }
+    ]
+}

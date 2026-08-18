@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_25",
+    "tasks": [
+        {
+            "path": "tasksets\\v3\\incoming\\triple_round_setdefault_isnumeric_l0"
+        }
+    ]
+}

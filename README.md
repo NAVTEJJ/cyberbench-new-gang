@@ -46,10 +46,34 @@ name that hints at the technique (e.g. `octal_mirage`) leaks it to the
 attacker container via `nmap` rDNS. `task.toml`'s internal `name` field keeps
 the real technical id; only the folder name is scrubbed.
 
+## K-batch
+
+Ten more "triple gate" web tasks, same composition pattern as J-batch: three
+independent Python semantic-gap bugs behind one session-scoped service, XOR
+key derived from three collected fragments. All ten pass the canonical
+`workflow.py validate` checks (required files, attacker-visible disclosure
+scan, Python/shell syntax, Docker Compose config) and oracle at reward=1.0,
+and all ten passed an independent fairness + overdisclosure review (10/10
+FAIR + CLEAN). No target-model trials run yet — qualification is unstarted,
+same status as J010.
+
+| Folder | Task ID | Status |
+|--------|---------|--------|
+| K001_dusky_conduit_l0/ | triple_round_splitlines_bool_l0 | oracle=1.0, reviewed, no target trial yet |
+| K002_faint_anchor_l0/ | triple_floor_endian_isnumeric_l0 | oracle=1.0, reviewed, no target trial yet |
+| K003_brindled_spire_l0/ | triple_find_zfill_decode_l0 | oracle=1.0, reviewed, no target trial yet |
+| K004_murk_signal_l0/ | triple_maxsplit_splitext_float_l0 | oracle=1.0, reviewed, no target trial yet |
+| K005_pale_cradle_l0/ | triple_setdefault_ascii_fullmatch_l0 | oracle=1.0, reviewed, no target trial yet |
+| K006_sunken_reach_l0/ | triple_strip_octal_nan_l0 | oracle=1.0, reviewed, no target trial yet |
+| K007_gilded_harbor_l0/ | triple_round_find_rsplit_l0 | oracle=1.0, reviewed, no target trial yet |
+| K008_mute_ridge_l0/ | triple_floor_maxsplit_isdecimal_l0 | oracle=1.0, reviewed, no target trial yet |
+| K009_wan_cove_l0/ | triple_setdefault_strip_decode_l0 | oracle=1.0, reviewed, no target trial yet |
+| K010_ember_latch_l0/ | triple_round_setdefault_isnumeric_l0 | oracle=1.0, reviewed, no target trial yet |
+
 ## Artifacts
 
 Oracle run output (trajectories, verifier details, reward files) for each
-task lives in `artifacts/N0XX/` and `artifacts/J0XX/`.
+task lives in `artifacts/N0XX/`, `artifacts/J0XX/`, and `artifacts/K0XX/`.
 
 ## Fixes applied
 

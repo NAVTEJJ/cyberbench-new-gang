@@ -1,0 +1,8 @@
+{
+    "task": {
+        "path": "tasksets\\v3\\incoming\\triple_strip_octal_nan_l0"
+    },
+    "trial_name": "triple_strip_octal_nan_l0__JGZG849",
+    "trials_dir": "jobs\\oracle_21",
+    "job_id": "84b514dd-fa6b-416a-9c28-33226ecf6d5d"
+}

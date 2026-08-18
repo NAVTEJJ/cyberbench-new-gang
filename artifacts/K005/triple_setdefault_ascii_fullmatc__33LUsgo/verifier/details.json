@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-setdefault-ascii-fullmatch"
+  ],
+  "submitted": [
+    "cyberbench{triple_setdefault_ascii_fullmatch_composition}"
+  ]
+}

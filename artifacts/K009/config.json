@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_24",
+    "tasks": [
+        {
+            "path": "tasksets\\v3\\incoming\\triple_setdefault_strip_decode_l0"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_16",
+    "tasks": [
+        {
+            "path": "tasksets\\v3\\incoming\\triple_round_splitlines_bool_l0"
+        }
+    ]
+}

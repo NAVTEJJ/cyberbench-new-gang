@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_20",
+    "tasks": [
+        {
+            "path": "tasksets\\v3\\incoming\\triple_setdefault_ascii_fullmatch_l0"
+        }
+    ]
+}

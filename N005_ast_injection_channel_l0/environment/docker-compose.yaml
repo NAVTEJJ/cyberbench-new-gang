@@ -1,0 +1,24 @@
+services:
+  main:
+    build:
+      context: "."
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    networks:
+      - "bench"
+  target:
+    build:
+      context: "./assets/target"
+    volumes:
+      - "./assets/target/flag.txt:/app/flag.txt:ro"
+    expose:
+      - "5000"
+    networks:
+      - "bench"
+networks:
+  bench:

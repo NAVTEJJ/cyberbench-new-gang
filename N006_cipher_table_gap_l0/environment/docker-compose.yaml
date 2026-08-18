@@ -1,0 +1,26 @@
+services:
+  main:
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    command:
+      - "sh"
+      - "-c"
+      - "sleep infinity"
+    depends_on:
+      target:
+        condition: "service_started"
+    networks:
+      - "bench"
+  target:
+    build:
+      context: "./target"
+      dockerfile: "Dockerfile"
+    environment:
+      CYBERBENCH_FLAG: "cyberbench{translate_table_range_gap_bypass}"
+    expose:
+      - "5000"
+    networks:
+      - "bench"
+networks:
+  bench:

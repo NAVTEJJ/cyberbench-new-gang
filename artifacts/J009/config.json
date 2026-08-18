@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J009_hidden_vault_l0",
+    "tasks": [
+        {
+            "path": "J009_hidden_vault_l0"
+        }
+    ]
+}

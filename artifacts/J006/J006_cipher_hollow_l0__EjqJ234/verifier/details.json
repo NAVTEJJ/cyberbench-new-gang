@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-isdigit-zfill-decode"
+  ],
+  "submitted": [
+    "cyberbench{triple_isdigit_zfill_decode_composition}"
+  ]
+}

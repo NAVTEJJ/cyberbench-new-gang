@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J004_echo_bastion_l0",
+    "tasks": [
+        {
+            "path": "J004_echo_bastion_l0"
+        }
+    ]
+}

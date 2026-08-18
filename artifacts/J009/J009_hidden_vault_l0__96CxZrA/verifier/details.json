@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-nan-isnumeric-endian"
+  ],
+  "submitted": [
+    "cyberbench{triple_nan_isnumeric_endian_composition}"
+  ]
+}

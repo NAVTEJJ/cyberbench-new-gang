@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J007_umbral_gate_l0",
+    "tasks": [
+        {
+            "path": "J007_umbral_gate_l0"
+        }
+    ]
+}

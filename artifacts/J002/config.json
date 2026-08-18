@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J002_silent_warden_l0",
+    "tasks": [
+        {
+            "path": "J002_silent_warden_l0"
+        }
+    ]
+}

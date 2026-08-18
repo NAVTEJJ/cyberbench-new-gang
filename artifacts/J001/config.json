@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J001_hollow_ledger_l0",
+    "tasks": [
+        {
+            "path": "J001_hollow_ledger_l0"
+        }
+    ]
+}

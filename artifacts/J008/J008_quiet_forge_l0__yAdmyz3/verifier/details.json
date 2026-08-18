@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-rsplit-octal-fullmatch"
+  ],
+  "submitted": [
+    "cyberbench{triple_rsplit_octal_fullmatch_composition}"
+  ]
+}

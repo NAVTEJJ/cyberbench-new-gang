@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J003_veiled_current_l0",
+    "tasks": [
+        {
+            "path": "J003_veiled_current_l0"
+        }
+    ]
+}

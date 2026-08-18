@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J010_lantern_seal_l0",
+    "tasks": [
+        {
+            "path": "J010_lantern_seal_l0"
+        }
+    ]
+}

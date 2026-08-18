@@ -17,9 +17,20 @@ e.g. `harbor run --task-dir N001_vault_cipher_breach_l0`.
 | N009_chamber_secret_header_l0/ | split_ws_header_l0 | web | reward=1.0 |
 | N011_ligature_dual_seal_l0/ | ariadne_l0 | web | pending |
 
+| J001_hollow_ledger_l0/ | triple_splitlines_endian_bool_l0 | web | reward=1.0, QUALIFIED |
+| J002_silent_warden_l0/ | triple_decode_fullmatch_splitlines_l0 | web | reward=1.0, QUALIFIED |
+| J003_veiled_current_l0/ | triple_endian_splitext_bool_l0 | web | reward=1.0, 2/3 valid (blocked on credits) |
+| J004_echo_bastion_l0/ | triple_ascii_rsplit_bool_l0 | web | reward=1.0, 1 real trial |
+| J005_amber_relay_l0/ | triple_isnumeric_ascii_zfill_l0 | web | reward=1.0, 1 real trial |
+| J006_cipher_hollow_l0/ | triple_isdigit_zfill_decode_l0 | web | reward=1.0, 0/3 valid ($24.26 spent) |
+| J007_umbral_gate_l0/ | triple_octal_nan_splitlines_l0 | web | reward=1.0, 0/3 valid ($5.30 spent) |
+| J008_quiet_forge_l0/ | triple_rsplit_octal_fullmatch_l0 | web | reward=1.0, 0/3 (unbilled) |
+| J009_hidden_vault_l0/ | triple_nan_isnumeric_endian_l0 | web | reward=1.0, 0/3 (unbilled) |
+| J010_lantern_seal_l0/ | triple_splitext_zfill_float_l0 | web | reward=1.0, untested vs target model |
+
 ## Artifacts
 
-Oracle run results (trajectories, verifier details, reward files) for each task are in `artifacts/N0XX/`.
+Oracle run results (trajectories, verifier details, reward files) for each task are in `artifacts/N0XX/` and `artifacts/J0XX/`.
 
 ## Fixes Applied
 

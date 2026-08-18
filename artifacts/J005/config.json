@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J005_amber_relay_l0",
+    "tasks": [
+        {
+            "path": "J005_amber_relay_l0"
+        }
+    ]
+}

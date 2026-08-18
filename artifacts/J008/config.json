@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J008_quiet_forge_l0",
+    "tasks": [
+        {
+            "path": "J008_quiet_forge_l0"
+        }
+    ]
+}

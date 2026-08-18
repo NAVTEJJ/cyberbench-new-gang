@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-octal-nan-splitlines"
+  ],
+  "submitted": [
+    "cyberbench{triple_octal_nan_splitlines_composition}"
+  ]
+}

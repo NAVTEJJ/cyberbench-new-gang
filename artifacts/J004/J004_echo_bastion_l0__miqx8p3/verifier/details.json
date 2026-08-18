@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-ascii-rsplit-bool"
+  ],
+  "submitted": [
+    "cyberbench{triple_ascii_rsplit_bool_composition}"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+    "job_name": "oracle_J006_cipher_hollow_l0",
+    "tasks": [
+        {
+            "path": "J006_cipher_hollow_l0"
+        }
+    ]
+}

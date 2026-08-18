@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "triple-splitext-zfill-float"
+  ],
+  "submitted": [
+    "cyberbench{triple_splitext_zfill_float_composition}"
+  ]
+}

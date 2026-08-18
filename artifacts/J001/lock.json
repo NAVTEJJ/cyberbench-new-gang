@@ -1,0 +1,62 @@
+{
+    "schema_version": 3,
+    "created_at": "2026-08-18T08:07:25.130857Z",
+    "harbor": {
+        "version": "0.21.0",
+        "is_editable": false
+    },
+    "n_concurrent_trials": 4,
+    "retry": {
+        "max_retries": 0,
+        "exclude_exceptions": [
+            "VerifierOutputParseError",
+            "RewardFileNotFoundError",
+            "ApiUsageLimitError",
+            "VerifierTimeoutError",
+            "ModelNotFoundError",
+            "AgentAuthenticationError",
+            "AgentSafetyRefusalError",
+            "AgentTimeoutError",
+            "RewardFileEmptyError"
+        ],
+        "wait_multiplier": 1.0,
+        "min_wait_sec": 1.0,
+        "max_wait_sec": 60.0
+    },
+    "trials": [
+        {
+            "schema_version": 2,
+            "task": {
+                "name": "J001_hollow_ledger_l0",
+                "type": "local",
+                "digest": "sha256:538115e56b251a56ebc76dbd5b871dc3c86c8b4e2997b932c3a43d6f4ab3a2c7",
+                "path": "J001_hollow_ledger_l0"
+            },
+            "install_only": false,
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "oracle",
+                "skills": [],
+                "resume_trajectory": false,
+                "extra_allowed_hosts": [],
+                "kwargs": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "docker",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "disable": false,
+                "environment_mode": "shared"
+            }
+        }
+    ]
+}

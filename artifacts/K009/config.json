@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_24",
+    "job_name": "oracle_r24",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_setdefault_strip_decode_l0"
+            "path": "tasksets\\v3\\incoming\\setdefault_strip_decode_l0"
         }
     ]
 }

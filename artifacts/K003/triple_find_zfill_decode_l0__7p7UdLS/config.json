@@ -1,8 +1,0 @@
-{
-    "task": {
-        "path": "tasksets\\v3\\incoming\\triple_find_zfill_decode_l0"
-    },
-    "trial_name": "triple_find_zfill_decode_l0__7p7UdLS",
-    "trials_dir": "jobs\\oracle_18",
-    "job_id": "ad542565-1299-4cef-a0df-21a7f5951088"
-}

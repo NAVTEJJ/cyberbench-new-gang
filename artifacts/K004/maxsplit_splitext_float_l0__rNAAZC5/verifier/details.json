@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "maxsplit-splitext-float"
+  ],
+  "submitted": [
+    "cyberbench{maxsplit_splitext_float_composition}"
+  ]
+}

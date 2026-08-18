@@ -1,9 +1,0 @@
-{
-  "reward": 1.0,
-  "solved": [
-    "triple-round-splitlines-bool"
-  ],
-  "submitted": [
-    "cyberbench{triple_round_splitlines_bool_composition}"
-  ]
-}

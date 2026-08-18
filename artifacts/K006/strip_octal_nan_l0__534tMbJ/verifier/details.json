@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "strip-octal-nan"
+  ],
+  "submitted": [
+    "cyberbench{strip_octal_nan_composition}"
+  ]
+}

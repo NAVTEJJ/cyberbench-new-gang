@@ -1,0 +1,8 @@
+{
+    "task": {
+        "path": "tasksets\\v3\\incoming\\setdefault_ascii_fullmatch_l0"
+    },
+    "trial_name": "setdefault_ascii_fullmatch_l0__Eb3Vvi4",
+    "trials_dir": "jobs\\oracle_r20",
+    "job_id": "771b5cc7-488a-4727-882b-ed3bda96f5ed"
+}

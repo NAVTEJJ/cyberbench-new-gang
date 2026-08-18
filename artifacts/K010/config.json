@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_25",
+    "job_name": "oracle_r25",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_round_setdefault_isnumeric_l0"
+            "path": "tasksets\\v3\\incoming\\round_setdefault_isnumeric_l0"
         }
     ]
 }

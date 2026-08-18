@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "round-setdefault-isnumeric"
+  ],
+  "submitted": [
+    "cyberbench{round_setdefault_isnumeric_composition}"
+  ]
+}

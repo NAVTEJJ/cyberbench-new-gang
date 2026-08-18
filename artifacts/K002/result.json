@@ -1,8 +1,8 @@
 {
-    "id": "441ab8b4-a22e-4a2b-986b-0cfe17834cbe",
-    "started_at": "2026-08-18T13:11:05.704585",
-    "updated_at": "2026-08-18T13:12:20.920353",
-    "finished_at": "2026-08-18T13:12:20.920353",
+    "id": "04e50d9e-ed4b-439e-8e66-f121887d4e89",
+    "started_at": "2026-08-18T14:39:32.060022",
+    "updated_at": "2026-08-18T14:40:37.919069",
+    "finished_at": "2026-08-18T14:40:37.919069",
     "n_total_trials": 1,
     "stats": {
         "n_completed_trials": 1,
@@ -24,7 +24,7 @@
                 "reward_stats": {
                     "reward": {
                         "1.0": [
-                            "triple_floor_endian_isnumeric_l0__E4eaatD"
+                            "floor_endian_isnumeric_l0__ahx2WKf"
                         ]
                     }
                 },

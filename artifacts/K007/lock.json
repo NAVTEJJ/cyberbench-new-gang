@@ -1,6 +1,6 @@
 {
     "schema_version": 3,
-    "created_at": "2026-08-18T07:51:08.414345Z",
+    "created_at": "2026-08-18T09:14:07.335919Z",
     "harbor": {
         "version": "0.21.0",
         "is_editable": false
@@ -9,15 +9,15 @@
     "retry": {
         "max_retries": 0,
         "exclude_exceptions": [
-            "RewardFileEmptyError",
-            "ModelNotFoundError",
-            "AgentSafetyRefusalError",
-            "VerifierOutputParseError",
             "RewardFileNotFoundError",
             "ApiUsageLimitError",
             "AgentAuthenticationError",
+            "ModelNotFoundError",
             "VerifierTimeoutError",
-            "AgentTimeoutError"
+            "VerifierOutputParseError",
+            "AgentSafetyRefusalError",
+            "AgentTimeoutError",
+            "RewardFileEmptyError"
         ],
         "wait_multiplier": 1.0,
         "min_wait_sec": 1.0,
@@ -27,10 +27,10 @@
         {
             "schema_version": 2,
             "task": {
-                "name": "triple_round_find_rsplit_l0",
+                "name": "round_find_rsplit_l0",
                 "type": "local",
-                "digest": "sha256:482b7ae27af936c447737c6b35d35029f3754c7eb51c72064df97538dde51531",
-                "path": "tasksets\\v3\\incoming\\triple_round_find_rsplit_l0"
+                "digest": "sha256:5d144f3d06a2cb5b0527da5d9cba9d9de90e51b90973f8ec814d11aa8459008a",
+                "path": "tasksets\\v3\\incoming\\round_find_rsplit_l0"
             },
             "install_only": false,
             "timeout_multiplier": 1.0,

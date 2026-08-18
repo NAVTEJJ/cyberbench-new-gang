@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_17",
+    "job_name": "oracle_r17",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_floor_endian_isnumeric_l0"
+            "path": "tasksets\\v3\\incoming\\floor_endian_isnumeric_l0"
         }
     ]
 }

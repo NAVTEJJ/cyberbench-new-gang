@@ -1,6 +1,6 @@
 {
     "schema_version": 3,
-    "created_at": "2026-08-18T07:39:14.308534Z",
+    "created_at": "2026-08-18T09:09:32.097718Z",
     "harbor": {
         "version": "0.21.0",
         "is_editable": false
@@ -9,15 +9,15 @@
     "retry": {
         "max_retries": 0,
         "exclude_exceptions": [
-            "VerifierTimeoutError",
-            "AgentAuthenticationError",
             "VerifierOutputParseError",
-            "ApiUsageLimitError",
             "ModelNotFoundError",
-            "AgentSafetyRefusalError",
             "RewardFileNotFoundError",
+            "RewardFileEmptyError",
             "AgentTimeoutError",
-            "RewardFileEmptyError"
+            "AgentSafetyRefusalError",
+            "AgentAuthenticationError",
+            "ApiUsageLimitError",
+            "VerifierTimeoutError"
         ],
         "wait_multiplier": 1.0,
         "min_wait_sec": 1.0,
@@ -27,10 +27,10 @@
         {
             "schema_version": 2,
             "task": {
-                "name": "triple_round_splitlines_bool_l0",
+                "name": "round_splitlines_bool_l0",
                 "type": "local",
-                "digest": "sha256:da7dd9ee451688394c9bf6f243bb606d16297f118d1d4c9df5e8cf764e70bb37",
-                "path": "tasksets\\v3\\incoming\\triple_round_splitlines_bool_l0"
+                "digest": "sha256:591da515190b84b9812f0fed346cac7821165edfb490ad0af3333d8f16b5c93d",
+                "path": "tasksets\\v3\\incoming\\round_splitlines_bool_l0"
             },
             "install_only": false,
             "timeout_multiplier": 1.0,

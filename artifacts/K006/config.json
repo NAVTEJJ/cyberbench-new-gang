@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_21",
+    "job_name": "oracle_r21",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_strip_octal_nan_l0"
+            "path": "tasksets\\v3\\incoming\\strip_octal_nan_l0"
         }
     ]
 }

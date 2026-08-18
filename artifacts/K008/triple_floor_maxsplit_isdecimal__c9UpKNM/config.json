@@ -1,8 +1,0 @@
-{
-    "task": {
-        "path": "tasksets\\v3\\incoming\\triple_floor_maxsplit_isdecimal_l0"
-    },
-    "trial_name": "triple_floor_maxsplit_isdecimal__c9UpKNM",
-    "trials_dir": "jobs\\oracle_23",
-    "job_id": "e3625faa-4ece-422c-b819-79f93e2f87e5"
-}

@@ -1,6 +1,6 @@
 {
     "schema_version": 3,
-    "created_at": "2026-08-18T07:59:22.181961Z",
+    "created_at": "2026-08-18T09:15:38.689174Z",
     "harbor": {
         "version": "0.21.0",
         "is_editable": false
@@ -10,14 +10,14 @@
         "max_retries": 0,
         "exclude_exceptions": [
             "AgentTimeoutError",
+            "ApiUsageLimitError",
+            "AgentSafetyRefusalError",
+            "RewardFileEmptyError",
             "ModelNotFoundError",
-            "AgentAuthenticationError",
-            "VerifierTimeoutError",
             "RewardFileNotFoundError",
             "VerifierOutputParseError",
-            "ApiUsageLimitError",
-            "RewardFileEmptyError",
-            "AgentSafetyRefusalError"
+            "AgentAuthenticationError",
+            "VerifierTimeoutError"
         ],
         "wait_multiplier": 1.0,
         "min_wait_sec": 1.0,
@@ -27,10 +27,10 @@
         {
             "schema_version": 2,
             "task": {
-                "name": "triple_round_setdefault_isnumeric_l0",
+                "name": "round_setdefault_isnumeric_l0",
                 "type": "local",
-                "digest": "sha256:47ba9b97278225d954c1492d8e31fd2248391e5427b51e4e99e4bdef42fb6a8c",
-                "path": "tasksets\\v3\\incoming\\triple_round_setdefault_isnumeric_l0"
+                "digest": "sha256:54ae193b38a311ba4ec4976000cecefd9a0b93427a0da436ff3b83c66fca02b7",
+                "path": "tasksets\\v3\\incoming\\round_setdefault_isnumeric_l0"
             },
             "install_only": false,
             "timeout_multiplier": 1.0,

@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_20",
+    "job_name": "oracle_r20",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_setdefault_ascii_fullmatch_l0"
+            "path": "tasksets\\v3\\incoming\\setdefault_ascii_fullmatch_l0"
         }
     ]
 }

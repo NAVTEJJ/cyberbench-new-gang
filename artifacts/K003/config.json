@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_18",
+    "job_name": "oracle_r18",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_find_zfill_decode_l0"
+            "path": "tasksets\\v3\\incoming\\find_zfill_decode_l0"
         }
     ]
 }

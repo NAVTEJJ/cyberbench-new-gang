@@ -3,7 +3,7 @@ import hashlib, json, os, struct, re, base64
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import unquote
 
-FLAG = "cyberbench{triple_round_splitlines_bool_composition}"
+FLAG = "cyberbench{round_splitlines_bool_composition}"
 FAKE_FLAG = "cyberbench{decoy_saml_authenticated}"
 sessions = {}
 

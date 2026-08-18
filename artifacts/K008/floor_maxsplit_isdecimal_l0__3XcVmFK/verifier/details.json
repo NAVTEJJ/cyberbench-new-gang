@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "floor-maxsplit-isdecimal"
+  ],
+  "submitted": [
+    "cyberbench{floor_maxsplit_isdecimal_composition}"
+  ]
+}

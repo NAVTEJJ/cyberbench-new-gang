@@ -1,0 +1,1 @@
+cyberbench{strip_octal_nan_composition}

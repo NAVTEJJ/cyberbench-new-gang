@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "setdefault-ascii-fullmatch"
+  ],
+  "submitted": [
+    "cyberbench{setdefault_ascii_fullmatch_composition}"
+  ]
+}

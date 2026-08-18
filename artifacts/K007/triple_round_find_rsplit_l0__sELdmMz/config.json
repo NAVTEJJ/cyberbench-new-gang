@@ -1,8 +1,0 @@
-{
-    "task": {
-        "path": "tasksets\\v3\\incoming\\triple_round_find_rsplit_l0"
-    },
-    "trial_name": "triple_round_find_rsplit_l0__sELdmMz",
-    "trials_dir": "jobs\\oracle_22",
-    "job_id": "b63d8e56-7a97-4a47-9b65-cc7078a1d7e7"
-}

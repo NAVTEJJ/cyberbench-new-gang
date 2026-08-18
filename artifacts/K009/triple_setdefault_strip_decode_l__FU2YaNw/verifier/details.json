@@ -1,9 +1,0 @@
-{
-  "reward": 1.0,
-  "solved": [
-    "triple-setdefault-strip-decode"
-  ],
-  "submitted": [
-    "cyberbench{triple_setdefault_strip_decode_composition}"
-  ]
-}

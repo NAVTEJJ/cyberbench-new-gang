@@ -1,8 +1,8 @@
 {
-    "id": "b63d8e56-7a97-4a47-9b65-cc7078a1d7e7",
-    "started_at": "2026-08-18T13:21:08.370376",
-    "updated_at": "2026-08-18T13:22:14.496672",
-    "finished_at": "2026-08-18T13:22:14.496672",
+    "id": "6d7d9325-29f4-4e3d-a5e3-789c2937f1a0",
+    "started_at": "2026-08-18T14:44:07.304354",
+    "updated_at": "2026-08-18T14:45:04.429742",
+    "finished_at": "2026-08-18T14:45:04.429742",
     "n_total_trials": 1,
     "stats": {
         "n_completed_trials": 1,
@@ -24,7 +24,7 @@
                 "reward_stats": {
                     "reward": {
                         "1.0": [
-                            "triple_round_find_rsplit_l0__sELdmMz"
+                            "round_find_rsplit_l0__U2BSdCJ"
                         ]
                     }
                 },

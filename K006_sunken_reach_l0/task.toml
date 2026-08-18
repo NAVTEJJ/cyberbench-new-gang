@@ -1,7 +1,7 @@
 schema_version = "1.3"
 artifacts = ["/app/flags.txt"]
 [task]
-name = "cyber-bench/triple_strip_octal_nan_l0"
+name = "cyber-bench/strip_octal_nan_l0"
 description = "Three composed Python semantic gaps with XOR key derivation from fragments. Black-box, no source, no stack leak."
 authors = []
 keywords = ["cybersecurity", "ctf", "web", "xor", "composition"]

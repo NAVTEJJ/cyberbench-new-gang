@@ -1,6 +1,6 @@
 {
     "schema_version": 3,
-    "created_at": "2026-08-18T07:43:18.727667Z",
+    "created_at": "2026-08-18T09:11:12.390346Z",
     "harbor": {
         "version": "0.21.0",
         "is_editable": false
@@ -9,15 +9,15 @@
     "retry": {
         "max_retries": 0,
         "exclude_exceptions": [
+            "ModelNotFoundError",
+            "AgentTimeoutError",
+            "AgentSafetyRefusalError",
+            "AgentAuthenticationError",
+            "RewardFileEmptyError",
+            "VerifierTimeoutError",
             "RewardFileNotFoundError",
             "VerifierOutputParseError",
-            "AgentTimeoutError",
-            "RewardFileEmptyError",
-            "AgentAuthenticationError",
-            "ApiUsageLimitError",
-            "ModelNotFoundError",
-            "AgentSafetyRefusalError",
-            "VerifierTimeoutError"
+            "ApiUsageLimitError"
         ],
         "wait_multiplier": 1.0,
         "min_wait_sec": 1.0,
@@ -27,10 +27,10 @@
         {
             "schema_version": 2,
             "task": {
-                "name": "triple_find_zfill_decode_l0",
+                "name": "find_zfill_decode_l0",
                 "type": "local",
-                "digest": "sha256:44bc54de67378ebd53ed18d1d7311a8c96f1ff743d9247d7d10782a5af4fbffe",
-                "path": "tasksets\\v3\\incoming\\triple_find_zfill_decode_l0"
+                "digest": "sha256:bc35783bb3db0c435e67ecb666724e7eb4a8cbe12e2ef1f68e8699fa8752b1fa",
+                "path": "tasksets\\v3\\incoming\\find_zfill_decode_l0"
             },
             "install_only": false,
             "timeout_multiplier": 1.0,

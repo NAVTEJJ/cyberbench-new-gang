@@ -1,0 +1,9 @@
+{
+  "reward": 1.0,
+  "solved": [
+    "setdefault-strip-decode"
+  ],
+  "submitted": [
+    "cyberbench{setdefault_strip_decode_composition}"
+  ]
+}

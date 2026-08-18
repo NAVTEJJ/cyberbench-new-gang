@@ -1,9 +1,0 @@
-{
-  "reward": 1.0,
-  "solved": [
-    "triple-find-zfill-decode"
-  ],
-  "submitted": [
-    "cyberbench{triple_find_zfill_decode_composition}"
-  ]
-}

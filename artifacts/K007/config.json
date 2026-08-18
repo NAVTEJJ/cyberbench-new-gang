@@ -1,8 +1,8 @@
 {
-    "job_name": "oracle_22",
+    "job_name": "oracle_r22",
     "tasks": [
         {
-            "path": "tasksets\\v3\\incoming\\triple_round_find_rsplit_l0"
+            "path": "tasksets\\v3\\incoming\\round_find_rsplit_l0"
         }
     ]
 }
